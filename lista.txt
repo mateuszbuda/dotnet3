@@ -33,6 +33,7 @@
 /Groups/Group/Id
 /Groups/History/Id
 /Groups/Shift/Id
+/Groups/Withdraw/Id - wycofanie przesuniêcia o 1
 
 /Admin/Index - wyœwietla userów
 /Admin/NewUser

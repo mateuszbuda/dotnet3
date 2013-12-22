@@ -1,0 +1,40 @@
+# nazwa³em je tak bo ju¿ istniej¹, nie przemyœla³em tego dobrze. mo¿e trzeba bêdzie coœ zmieniæ
+/Account/Login
+/Account/Register - tego mo¿e nie byæ. admin bêdzie tworzy³
+/Account/Manage
+/Account/LogOff
+/Home/Index - menu g³ówne, statystyki
+
+/Warehouses/Index - Magazyny
+/Warehouses/Warehouse/Id - magazyn
+/Warehouses/New
+/Warehouses/Edit/Id
+/Warehouses/Delete/Id
+/Warehouses/Sector/Id - podgl¹d sektora
+
+/Sectors/New
+/Sectors/Delete/Id
+/Sectors/Edit/Id
+
+/Products/Index
+/Products/New
+/Products/Product/Id
+/Products/Edit/Id
+
+/Partners/Index
+/Partners/New
+/Partners/Partner/Id
+/Partners/Edit/Id
+/Partners/History/Id
+
+/Groups/Index
+/Groups/New - nowa partia z menu partii
+/Groups/New/Id - nowa partia (dostêp z menu magazynu - ustawia automatycznie magazyn i sektor. wczeœniej tego nie by³o)
+/Groups/Group/Id
+/Groups/History/Id
+/Groups/Shift/Id
+
+/Admin/Index - wyœwietla userów
+/Admin/NewUser
+/Admin/Edit/Id
+/Admin/Reset/Id - reset has³a

@@ -1,0 +1,18 @@
+﻿@model System.Collections.Generic.List<WMS.ServicesInterface.DTOs.WarehouseDetailsDto>
+@{
+    ViewBag.Title = "Magazyny";
+}
+
+<h2>Magazyny</h2>
+
+<ul id="warehouse">
+    @foreach (var w in Model)
+    {
+        string styleId = w.SectorsCount == 0 ? "warehouseempty" : w.FreeSectorsCount == 0 ? "warehousefull" : "warehouse";
+        <li id="@styleId">
+            <a id="awarehouse" href="@Url.Action("Warehouse", "Warehouses", new { id = w.Id })">
+                <div>@w.Name<br />@w.FreeSectorsCount / @w.SectorsCount</div>
+            </a>
+        </li>
+    }
+</ul>

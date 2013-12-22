@@ -9,6 +9,8 @@ namespace WMS.WebClient
     {
         public static void Register(HttpConfiguration config)
         {
+            System.Net.ServicePointManager.ServerCertificateValidationCallback = (s, c, d, e) => true;
+
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",

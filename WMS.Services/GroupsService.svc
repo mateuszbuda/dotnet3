@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="WMS.Services.GroupsService" CodeBehind="GroupsService.svc.cs" %>

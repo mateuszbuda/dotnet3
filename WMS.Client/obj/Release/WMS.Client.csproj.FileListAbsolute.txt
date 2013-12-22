@@ -1,0 +1,1 @@
+C:\jablonskim\Dropbox\S5\NET\Lab3\dotnet3\WMS\WMS.Client\bin\Release\WMS.Client.exe.config

@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="WMS.Services.AuthenticationService" CodeBehind="AuthenticationService.svc.cs" %>

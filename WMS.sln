@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WMS.Services", "WMS.Services\WMS.Services.csproj", "{0CBCED2C-E8FA-48B5-9B3F-7142E16F9A51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WMS.ServicesInterface", "WMS.ServicesInterface\WMS.ServicesInterface.csproj", "{69E0D959-E43E-42F0-8E48-998700A21A98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WMS.Client", "WMS.Client\WMS.Client.csproj", "{58B647CA-59AA-4F29-AAAB-AF80523ACE6E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0CBCED2C-E8FA-48B5-9B3F-7142E16F9A51} = {0CBCED2C-E8FA-48B5-9B3F-7142E16F9A51}
+		{69E0D959-E43E-42F0-8E48-998700A21A98} = {69E0D959-E43E-42F0-8E48-998700A21A98}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WMS.DatabaseAccess", "WMS.DatabaseAccess\WMS.DatabaseAccess.csproj", "{3F533C53-DDE5-4FF3-B53D-5B694D7CA488}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WMS.DatabaseAccess.Tests", "WMS.DatabaseAccess.Tests\WMS.DatabaseAccess.Tests.csproj", "{5C761249-CB99-405F-83F3-47FE0C8EAB08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WMS.Services.Tests", "WMS.Services.Tests\WMS.Services.Tests.csproj", "{D6BE537D-F796-42B4-85F8-1D5D5EB7AC6A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0CBCED2C-E8FA-48B5-9B3F-7142E16F9A51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CBCED2C-E8FA-48B5-9B3F-7142E16F9A51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CBCED2C-E8FA-48B5-9B3F-7142E16F9A51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CBCED2C-E8FA-48B5-9B3F-7142E16F9A51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69E0D959-E43E-42F0-8E48-998700A21A98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69E0D959-E43E-42F0-8E48-998700A21A98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69E0D959-E43E-42F0-8E48-998700A21A98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69E0D959-E43E-42F0-8E48-998700A21A98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58B647CA-59AA-4F29-AAAB-AF80523ACE6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58B647CA-59AA-4F29-AAAB-AF80523ACE6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58B647CA-59AA-4F29-AAAB-AF80523ACE6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58B647CA-59AA-4F29-AAAB-AF80523ACE6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F533C53-DDE5-4FF3-B53D-5B694D7CA488}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F533C53-DDE5-4FF3-B53D-5B694D7CA488}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F533C53-DDE5-4FF3-B53D-5B694D7CA488}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F533C53-DDE5-4FF3-B53D-5B694D7CA488}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C761249-CB99-405F-83F3-47FE0C8EAB08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C761249-CB99-405F-83F3-47FE0C8EAB08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C761249-CB99-405F-83F3-47FE0C8EAB08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C761249-CB99-405F-83F3-47FE0C8EAB08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6BE537D-F796-42B4-85F8-1D5D5EB7AC6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6BE537D-F796-42B4-85F8-1D5D5EB7AC6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6BE537D-F796-42B4-85F8-1D5D5EB7AC6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6BE537D-F796-42B4-85F8-1D5D5EB7AC6A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,52 @@
+﻿<Controls:BaseDialog x:Class="WMS.Client.Dialogs.UserDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:Dupa="clr-namespace:WMS.ServicesInterface;assembly=WMS.ServicesInterface"
+            xmlns:Misc="clr-namespace:WMS.Client.Misc"
+            xmlns:Controls="clr-namespace:WMS.Client.Dialogs"
+                   xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="Tworzenie nowego użytkownika" Height="272" Width="300" ResizeMode="NoResize">
+
+    <Window.Resources>
+        <ObjectDataProvider x:Key="permissions"
+                            MethodName="GetNames"
+                            ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="Dupa:PermissionLevel" />
+            </ObjectDataProvider.MethodParameters>
+
+        </ObjectDataProvider>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="Nazwa użytkownika:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <Label Grid.Row="1" Content="Hasło:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <Label Grid.Row="2" Content="Uprawnienia:" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <Button Grid.Row="3" Content="Anuluj" Click="Cancel_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBox Name="username" Grid.Row="0" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
+            <PasswordBox Name="password" Grid.Row="1" HorizontalAlignment="Left" Height="22" VerticalAlignment="Center" Width="120"/>
+            <ComboBox Name="permissions" Grid.Row="2" HorizontalAlignment="Left" Height="22" VerticalAlignment="Center" Width="120"
+                      ItemsSource="{Binding Source={StaticResource permissions}}"/>
+            <Button Grid.Row="3" Content="OK" Click="OK_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
+        </Grid>
+    </Grid>
+</Controls:BaseDialog>

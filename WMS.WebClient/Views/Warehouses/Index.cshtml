@@ -1,18 +1,66 @@
 ﻿@model System.Collections.Generic.List<WMS.ServicesInterface.DTOs.WarehouseDetailsDto>
+@using WMS.ServicesInterface;
+
 @{
     ViewBag.Title = "Magazyny";
 }
 
+@if (ViewBag.Permissions <= PermissionLevel.Administrator)
+{
+    <a href="@Url.Action("New")" class="button">Dodaj nowy</a>
+}
 <h2>Magazyny</h2>
+
+@if (Model.Count == 0)
+{
+    <h6>Brak magazynów w systemie!</h6>   
+}
 
 <ul id="warehouse">
     @foreach (var w in Model)
     {
         string styleId = w.SectorsCount == 0 ? "warehouseempty" : w.FreeSectorsCount == 0 ? "warehousefull" : "warehouse";
         <li id="@styleId">
-            <a id="awarehouse" href="@Url.Action("Warehouse", "Warehouses", new { id = w.Id })">
+            <a class="warehouse-button" id="w_@w.Id" href="@Url.Action("Warehouse", "Warehouses", new { id = w.Id })" title="@w.Name">
                 <div>@w.Name<br />@w.FreeSectorsCount / @w.SectorsCount</div>
             </a>
         </li>
     }
 </ul>
+
+@if (ViewBag.Permissions <= PermissionLevel.Manager)
+{
+    @Styles.Render("~/Content/jquery.contextMenu.css")
+    @Scripts.Render("~/Scripts/jquery.ui.position.js")
+    @Scripts.Render("~/Scripts/jquery.contextMenu.js")
+
+
+    <script>
+        $(function () {
+            $.contextMenu({
+                selector: '.warehouse-button',
+                items: {
+                    "edit": {
+                        name: "Edytuj",
+                        callback: function (key, opt) {
+                            window.location.href = "@Url.Action("Edit", "Warehouses")" + opt.$trigger.attr("id").replace("w_", "/");
+                    }
+                },
+                @if (ViewBag.Permissions <= PermissionLevel.Administrator)
+                {
+                    <text>
+                "delete": {
+                    name: "Usuń",
+                    callback: function (key, opt) {
+                        var ans = confirm("Czy na pewno chcesz usunąć magazyn '" + opt.$trigger.attr("title") + "'?");
+                        if (ans)
+                            window.location.href = "@Url.Action("Delete", "Warehouses")" + opt.$trigger.attr("id").replace("w_", "/");
+                    }
+                }
+                </text>
+                }
+            }
+        });
+    });
+    </script>
+}

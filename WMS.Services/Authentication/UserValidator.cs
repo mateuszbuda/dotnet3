@@ -10,6 +10,7 @@ using WMS.DatabaseAccess.Entities;
 using WMS.ServicesInterface.DTOs;
 using WMS.Services.Assemblers;
 using WMS.ServicesInterface.DataContracts;
+using System.Web.Security;
 
 namespace WMS.Services.Authentication
 {
@@ -20,19 +21,21 @@ namespace WMS.Services.Authentication
     {
         public override void Validate(string userName, string password)
         {
-            UserAssembler userAssembler = new UserAssembler();
-            var u = userAssembler.ToEntity(new UserDto() { Username = userName, Password = password });
-            User user = null;
-
-            using (var context = new SystemContext())
+            FormsAuthenticationTicket ticket;
+            try
             {
-                context.TransactionSync(tc => 
-                    user = tc.Entities.Users.Where(x => x.Username == u.Username).FirstOrDefault());
+                ticket = FormsAuthentication.Decrypt(password);
+            }
+            catch
+            {
+                throw new FaultException("Zły login lub hasło!");
             }
 
-            // makecert.exe -sr LocalMachine -ss My -a sha1 -n CN=TestCert -sky exchange -pe
-            if (user == null || u.Password != user.Password)
-                throw new FaultException("Zły login lub hasło!");
+            if (ticket.Expired)
+                throw new FaultException("Sesja wygasła!");
+
+            if (ticket.Name != userName)
+                throw new FaultException("Zły login lub hasło");
         }
     }
 }

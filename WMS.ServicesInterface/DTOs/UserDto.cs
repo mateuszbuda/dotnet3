@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace WMS.ServicesInterface.DTOs
 {
@@ -29,6 +30,12 @@ namespace WMS.ServicesInterface.DTOs
         public PermissionLevel Permissions { get; set; }
 
         public int PermissionsVal { get; set; }
+
+        public HttpCookie Token { get; set; }
+
+        public bool Remember { get; set; }
+
+        public string NewPassword { get; set; }
 
         public override bool Equals(object obj)
         {

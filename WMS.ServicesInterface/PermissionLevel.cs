@@ -9,5 +9,5 @@ namespace WMS.ServicesInterface
     /// <summary>
     /// Enum dla rodzajów kont użytkowników
     /// </summary>
-    public enum PermissionLevel : int { Administrator = 0, Manager = 1, User = 2 }
+    public enum PermissionLevel : int { Administrator = 0, Manager = 1, User = 2, Unknown = 3 }
 }

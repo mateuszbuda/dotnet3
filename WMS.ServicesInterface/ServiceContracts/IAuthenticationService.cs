@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Permissions;
 using System.ServiceModel;
+using System.ServiceModel.Activation;
 using System.Text;
 using System.Threading.Tasks;
 using WMS.ServicesInterface.DataContracts;
@@ -24,6 +26,15 @@ namespace WMS.ServicesInterface.ServiceContracts
         [FaultContract(typeof(ServiceException))]
         Response<UserDto> Authenticate(Request<UserDto> user);
 
+        [OperationContract]
+        [FaultContract(typeof(ServiceException))]
+        Response<UserDto> AuthenticateWithToken(Request<UserDto> user);
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceException))]
+        Response<UserDto> ChangePassword(Request<UserDto> user);
+
+        // przenieść do innej usługi!!!
         [OperationContract]
         [FaultContract(typeof(ServiceException))]
         Response<List<UserDto>> GetUsers(Request request);

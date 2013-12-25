@@ -1,4 +1,56 @@
-﻿ul#warehouse {
+﻿a.button {
+    background-color: #D3DCE0;
+    border: solid;
+    border-width: 1px;
+    border-color: #555;
+    padding: 8px;
+    margin: 8px;
+    border-radius: 4px;
+    display: inline;
+    float: right;
+    text-decoration: none;
+}
+
+    a.button:hover {
+        background-color: #A3ACB0;
+    }
+
+ul#stats {
+    /*width: 160px;*/
+    display: table;
+    font-size: medium;
+}
+
+    ul#stats li {
+        display: table-row;
+    }
+
+        ul#stats li p {
+            display: table-cell;
+            padding-left: 16px;
+            font-weight: bold;
+        }
+
+a.logout {
+    border-radius: 4px;
+}
+
+#login a.logout:hover {
+    background-color: #A3ACB0;
+}
+
+p#errormessagep {
+    font-weight: bold;
+    color: #AA0000;
+    font-size: medium;
+}
+
+h2#errormessage {
+    font-weight: bold;
+    color: #AA0000;
+}
+
+ul#warehouse {
 }
 
     ul#warehouse li {
@@ -19,7 +71,7 @@
             background-color: #fffc63;
         }
 
-        ul#warehouse li a#awarehouse:hover {
+        ul#warehouse li a.warehouse-button:hover {
             background-color: initial;
         }
 
@@ -375,9 +427,7 @@ aside {
 
 /* login page */
 #loginForm {
-    border-right: solid 2px #c8c8c8;
     float: left;
-    width: 55%;
 }
 
     #loginForm .validation-error {

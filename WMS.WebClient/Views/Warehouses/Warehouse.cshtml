@@ -6,12 +6,17 @@
 
 <h2>Magazyn '@Model.Warehouse.Name'</h2>
 
+@if (Model.Sectors.Count == 0)
+{
+    <h6>Brak sektorów w magazynie</h6>
+}
+
 <ul id="warehouse">
     @foreach (var s in Model.Sectors)
     {
         string styleId = s.Limit == 0 ? "warehouseempty" : s.GroupsCount == s.Limit ? "warehousefull" : "warehouse";
         <li id="@styleId">
-            <a id="awarehouse" href="@Url.Action("Sector", "Warehouses", new { id = s.Id })">
+            <a class="warehouse-button" id="s_@s.Id" href="@Url.Action("Sector", "Warehouses", new { id = s.Id })" title="@s.Number">
                 <div>
                     <b>@s.Number</b><br />@s.GroupsCount / @s.Limit
                 </div>

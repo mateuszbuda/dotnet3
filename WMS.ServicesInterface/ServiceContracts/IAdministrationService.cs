@@ -12,26 +12,29 @@ using WMS.ServicesInterface.DTOs;
 namespace WMS.ServicesInterface.ServiceContracts
 {
     /// <summary>
-    /// Interfejs do uwierzytelniania użytkowników przy logowaniu
+    /// Interfejs administracyjny
     /// </summary>
     [ServiceContract]
-    public interface IAuthenticationService
+    public interface IAdministrationService
     {
-        /// <summary>
-        /// Uwierzytelnia zadanego użytkownika lub rzuca wyjątek w razie niepowodzenia
-        /// </summary>
-        /// <param name="user">Zapytanie z uwierzytelnianym użytkownikiem</param>
-        /// <returns>Uwierzytnienionego użytkownika wraz z jego uprawnieniami</returns>
         [OperationContract]
         [FaultContract(typeof(ServiceException))]
-        Response<UserDto> Authenticate(Request<UserDto> user);
+        Response<List<UserDto>> GetUsers(Request request);
 
         [OperationContract]
         [FaultContract(typeof(ServiceException))]
-        Response<UserDto> AuthenticateWithToken(Request<UserDto> user);
+        Response<UserDto> GetUser(Request<int> userId);
 
         [OperationContract]
         [FaultContract(typeof(ServiceException))]
-        Response<UserDto> ChangePassword(Request<UserDto> user);
+        Response<UserDto> AddNew(Request<UserDto> user);
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceException))]
+        Response<UserDto> Edit(Request<UserDto> user);
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceException))]
+        Response<bool> Delete(Request<int> userId);
     }
 }

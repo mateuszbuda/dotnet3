@@ -16,13 +16,13 @@ namespace WMS.WebClient.Controllers
         //
         // GET: /Warehouses/
 
-        [Authorize]
+        //[Authorize]
         public ActionResult Index()
         {
             return Execute(() => WarehousesService.GetWarehouses(new Request()).Data);
         }
 
-        [Authorize]
+        //[Authorize]
         public ActionResult Warehouse(int id = 0)
         {
             return Execute(() =>
@@ -40,7 +40,7 @@ namespace WMS.WebClient.Controllers
                 });
         }
 
-        [Authorize]
+        //[Authorize]
         public ActionResult Edit(int id)
         {
             return Execute(() =>
@@ -49,7 +49,7 @@ namespace WMS.WebClient.Controllers
                 });
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(WarehouseInfoDto warehouse, int id)

@@ -29,6 +29,10 @@ namespace WMS.WebClient.Misc
             }
             catch { }
             //try
+
+            // Wyłączenie autoryzacji!
+            username = "admin";
+
             var authenticationChannelFactory = new ChannelFactory<IAuthenticationService>("SecureBinding_IAuthenticationService");
             authenticationChannelFactory.Credentials.UserName.UserName = username;
             //authenticationChannelFactory.Credentials.UserName.Password = "test";

@@ -55,6 +55,7 @@
     <Compile Include="DTOs\WarehouseDto.cs" />
     <Compile Include="PermissionLevel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceContracts\IAdministrationService.cs" />
     <Compile Include="ServiceContracts\IAuthenticationService.cs" />
     <Compile Include="ServiceContracts\IGroupsService.cs" />
     <Compile Include="ServiceContracts\IPartnersService.cs" />

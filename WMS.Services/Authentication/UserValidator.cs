@@ -21,21 +21,23 @@ namespace WMS.Services.Authentication
     {
         public override void Validate(string userName, string password)
         {
-            FormsAuthenticationTicket ticket;
-            try
-            {
-                ticket = FormsAuthentication.Decrypt(password);
-            }
-            catch
-            {
-                throw new FaultException("Zły login lub hasło!");
-            }
+            // Wyłączona walidacja!!!
 
-            if (ticket.Expired)
-                throw new FaultException("Sesja wygasła!");
+            //FormsAuthenticationTicket ticket;
+            //try
+            //{
+            //    ticket = FormsAuthentication.Decrypt(password);
+            //}
+            //catch
+            //{
+            //    throw new FaultException("Zły login lub hasło!");
+            //}
 
-            if (ticket.Name != userName)
-                throw new FaultException("Zły login lub hasło");
+            //if (ticket.Expired)
+            //    throw new FaultException("Sesja wygasła!");
+
+            //if (ticket.Name != userName)
+            //    throw new FaultException("Zły login lub hasło");
         }
     }
 }

@@ -17,7 +17,7 @@ namespace WMS.WebClient.Controllers
         /// Menu główne i statystyki
         /// </summary>
         /// <returns></returns>
-        [Authorize]
+        //[Authorize]
         public ActionResult Index()
         {
             return Execute(() => WarehousesService.GetStatistics(new Request()).Data);

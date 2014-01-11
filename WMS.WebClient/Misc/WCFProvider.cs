@@ -18,7 +18,8 @@ namespace WMS.WebClient.Misc
 
         public WCFProvider()
         {
-            ViewBag.Permissions = this.Permissions;
+            // Wyłączenie autoryzacji!!!
+            ViewBag.Permissions = PermissionLevel.Administrator; //this.Permissions;
             string username = "";
             string password = "";
 

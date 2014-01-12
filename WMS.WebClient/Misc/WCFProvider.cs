@@ -14,6 +14,7 @@ namespace WMS.WebClient.Misc
     public class WCFProvider : Controller
     {
         protected IWarehousesService WarehousesService { get; set; }
+        protected IProductsService ProductsService { get; set; }
         protected IAuthenticationService AuthenticationService { get; set; }
 
         public WCFProvider()
@@ -39,13 +40,18 @@ namespace WMS.WebClient.Misc
             //authenticationChannelFactory.Credentials.UserName.Password = "test";
             AuthenticationService = authenticationChannelFactory.CreateChannel();
 
+            var productChannelFactory = new ChannelFactory<IProductsService>("SecureBinding_IProductsService");
+            productChannelFactory.Credentials.UserName.UserName = username;
+            productChannelFactory.Credentials.UserName.Password = password;
+            ProductsService = productChannelFactory.CreateChannel();
+
             var warehouseChannelFactory = new ChannelFactory<IWarehousesService>("SecureBinding_IWarehousesService");
             warehouseChannelFactory.Credentials.UserName.UserName = username;
             warehouseChannelFactory.Credentials.UserName.Password = password;
             WarehousesService = warehouseChannelFactory.CreateChannel();
         }
 
-        public ActionResult Execute<T>(Func<T> action, string viewName = null, 
+        public ActionResult Execute<T>(Func<T> action, string viewName = null,
             string masterName = null, Func<Exception, ErrorMessage> errorMessage = null)
         {
             try

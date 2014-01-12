@@ -1,0 +1,9 @@
+﻿@model List<WMS.ServicesInterface.DTOs.SectorDto>
+
+@foreach (var s in Model)
+{
+    if (!s.Deleted && (s.GroupsCount < s.Limit || !ViewBag.Internal))
+    {
+        <option value="@s.Id">Sektor #@s.Number</option>
+    }
+}

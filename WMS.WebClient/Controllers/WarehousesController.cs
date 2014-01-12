@@ -41,6 +41,29 @@ namespace WMS.WebClient.Controllers
         }
 
         //[Authorize]
+        public ActionResult Show(int id)
+        {
+            try
+            {
+                var w = WarehousesService.GetWarehouse(new Request<int>(id)).Data;
+                if (w == null)
+                    throw new ClientException("Magazyn o takim ID nie istnieje!");
+
+                if (w.Internal)
+                    return RedirectToAction("Warehouse", "Warehouses", new { id = w.Id });
+                else
+                {
+                    var p = PartnersService.GetPartnerByWarehouse(new Request<int>(id)).Data;
+                    return RedirectToAction("Partner", "Partners", new { id = p.Id });
+                }
+            }
+            catch (Exception e)
+            {
+                return View("DataError", GetErrorMessage(e));
+            }
+        }
+
+        //[Authorize]
         public ActionResult Edit(int id)
         {
             return Execute(() =>

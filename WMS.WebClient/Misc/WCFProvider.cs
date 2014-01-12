@@ -15,6 +15,8 @@ namespace WMS.WebClient.Misc
     {
         protected IWarehousesService WarehousesService { get; set; }
         protected IAuthenticationService AuthenticationService { get; set; }
+        protected IGroupsService GroupsService { get; set; }
+        protected IPartnersService PartnersService { get; set; }
 
         public WCFProvider()
         {
@@ -43,6 +45,16 @@ namespace WMS.WebClient.Misc
             warehouseChannelFactory.Credentials.UserName.UserName = username;
             warehouseChannelFactory.Credentials.UserName.Password = password;
             WarehousesService = warehouseChannelFactory.CreateChannel();
+
+            var groupsChannelFactory = new ChannelFactory<IGroupsService>("SecureBinding_IGroupsService");
+            groupsChannelFactory.Credentials.UserName.UserName = username;
+            groupsChannelFactory.Credentials.UserName.Password = password;
+            GroupsService = groupsChannelFactory.CreateChannel();
+
+            var partnersChannelFactory = new ChannelFactory<IPartnersService>("SecureBinding_IPartnersService");
+            partnersChannelFactory.Credentials.UserName.UserName = username;
+            partnersChannelFactory.Credentials.UserName.Password = password;
+            PartnersService = partnersChannelFactory.CreateChannel();
         }
 
         public ActionResult Execute<T>(Func<T> action, string viewName = null, 
@@ -74,6 +86,7 @@ namespace WMS.WebClient.Misc
 
         protected ErrorMessage GetErrorMessage(Exception e)
         {
+            return new ErrorMessage("Błąd", e.ToString());
             if (e.GetType() == typeof(FaultException<ServiceException>))
                 return new ErrorMessage("Błąd", (e as FaultException<ServiceException>).Detail.Message);
             else if (e.GetType() == typeof(ClientException))

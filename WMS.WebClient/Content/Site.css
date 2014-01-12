@@ -1,5 +1,39 @@
-﻿a.button {
-    background-color: #D3DCE0;
+﻿tr.wInternal td {
+    background-color: #DFDEDF;
+    border: 1px solid #EFEEEF;
+}
+
+thead.tabDescription tr th {
+    background-color: #AFAEAF;
+    border: 1px solid #EFEEEF;
+    padding: 0.25em 8px 0.25em 8px;
+    text-align: center;
+}
+
+tr.wExternal td {
+    background-color: #BFBEBF;
+    border: 1px solid #EFEEEF;
+}
+
+tr.tabDescription td {
+    background-color: #DFDEDF;
+    border: 1px solid #EFEEEF;
+    padding: 2px 1em 2px 1em;
+    text-align: center;
+}
+
+td.centered {
+    padding: 0 1em 0 1em;
+    text-align: center;
+}
+
+td.longName {
+    padding: 0.25em 2em 0.25em 8px;
+    min-width: 100px;
+}
+
+a.button {
+    background-color: #DFDEDF;
     border: solid;
     border-width: 1px;
     border-color: #555;
@@ -12,7 +46,7 @@
 }
 
     a.button:hover {
-        background-color: #A3ACB0;
+        background-color: #BFBEBF;
     }
 
 ul#stats {
@@ -519,7 +553,7 @@ label {
         display: inline;
     }
 
-input, textarea {
+input, textarea, select {
     border: 1px solid #e2e2e2;
     background: #fff;
     color: #333;

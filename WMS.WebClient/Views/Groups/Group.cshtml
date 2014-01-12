@@ -1,0 +1,45 @@
+﻿@model List<WMS.ServicesInterface.DTOs.ProductDetailsDto>
+@using WMS.ServicesInterface.DTOs
+@using WMS.ServicesInterface;
+
+@{
+    ViewBag.Title = "Partia " + ViewBag.GroupInfo.Id;
+}
+
+@if (ViewBag.GroupInfo.Internal)
+{
+    <a href="@Url.Action("Shift", new { id = ViewBag.GroupInfo.Id })" class="button">Wyślij</a>
+}
+
+<a href="@Url.Action("History", new { id = ViewBag.GroupInfo.Id })" class="button">Historia</a>
+
+@if (ViewBag.Permissions <= PermissionLevel.Manager)
+{
+    <a onclick="return confirm('Czy jesteś pewien, że chcesz wycofać ostatnie przesunięcie dla tej partii?');" href="@Url.Action("Withdraw", new { id = ViewBag.GroupInfo.Id })" class="button">Wycofaj przesunięcie</a>
+}
+
+<h2>Magazyn '@ViewBag.GroupInfo.WarehouseName', Sektor #@ViewBag.GroupInfo.SectorNumber, Partia #@ViewBag.GroupInfo.Id</h2>
+
+<table>
+    <thead class="tabDescription">
+        <tr>
+            <th>Produkt</th>
+            <th>Ilość</th>
+            <th>Cena</th>
+            <th>Cena jednostkowa</th>
+            <th>Data produkcji</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ProductDetailsDto p in Model)
+        {
+            <tr class="tabDescription">
+                <td><a href="@Url.Action("Product", "Products", new { id = p.Id })">@p.Name</a></td>
+                <td>@p.Count</td>
+                <td>@(p.Price * p.Count)</td>
+                <td>@p.Price</td>
+                <td>@p.ProductionDate.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>

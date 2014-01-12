@@ -263,6 +263,7 @@ namespace WMS.Services
             Transaction(tc =>
                 {
                     w = tc.Entities.Warehouses.Find(warehouse.Content.Id);
+                    //w = tc.Entities.Warehouses.Where(x => w.Id == warehouse.Content.Id).FirstOrDefault();
                     if (w == null)
                         throw new FaultException<ServiceException>(new ServiceException("Taki magazyn nie istnieje!"));
 

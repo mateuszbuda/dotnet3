@@ -9,11 +9,13 @@
 	/Warehouses/New
 	/Warehouses/Edit/Id
 	/Warehouses/Delete/Id
+	/Warehouses/Show/Id - przekierowuje w zale¿noœci od id na magazyn lub partnera
 /Warehouses/Sector/Id - podgl¹d sektora
 
 /Sectors/New
 /Sectors/Delete/Id
 /Sectors/Edit/Id
+/Sectors/GetOptions/Id - pobiera listê sektorów danego magazynu
 
 /Products/Index
 /Products/New
@@ -26,13 +28,13 @@
 /Partners/Edit/Id
 /Partners/History/Id
 
-/Groups/Index
+	/Groups/Index
 /Groups/New - nowa partia z menu partii
 /Groups/New/Id - nowa partia (dostêp z menu magazynu - ustawia automatycznie magazyn i sektor. wczeœniej tego nie by³o)
-/Groups/Group/Id
-/Groups/History/Id
-/Groups/Shift/Id
-/Groups/Withdraw/Id - wycofanie przesuniêcia o 1
+	/Groups/Group/Id
+	/Groups/History/Id
+	/Groups/Shift/Id
+/Groups/Withdraw/Id - wycofanie przesuniêcia o 1, manager mo¿e wycofaæ
 
 /Admin/Index - wyœwietla userów
 /Admin/NewUser

@@ -311,6 +311,11 @@
     <Content Include="Views\Warehouses\Warehouse.cshtml" />
     <Content Include="Views\Shared\DataError.cshtml" />
     <Content Include="Views\Warehouses\Edit.cshtml" />
+    <Content Include="Views\Groups\Index.cshtml" />
+    <Content Include="Views\Groups\Shift.cshtml" />
+    <Content Include="Views\Groups\Group.cshtml" />
+    <Content Include="Views\Groups\History.cshtml" />
+    <Content Include="Views\Sectors\GetOptions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,28 @@
+﻿@model List<WMS.ServicesInterface.DTOs.ShiftDto>
+@using WMS.ServicesInterface.DTOs
+
+@{
+    ViewBag.Title = "Historia partii " + ViewBag.GroupInfo.Id;
+}
+
+<h2>Historia partii #@ViewBag.GroupInfo.Id</h2>
+
+<table>
+    <thead class="tabDescription">
+        <tr>
+            <th>Nadawca</th>
+            <th>Odbiorca</th>
+            <th>Data otrzymania</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ShiftDto shift in Model)
+        {
+            <tr class="tabDescription">
+                <td><a href="@Url.Action("Show", "Warehouses", new { id = shift.SenderId })">@shift.SenderName</a></td>
+                <td><a href="@Url.Action("Show", "Warehouses", new { id = shift.WarehouseId })">@shift.WarehouseName</a></td>
+                <td>@shift.Date</td>
+            </tr>
+        }
+    </tbody>
+</table>

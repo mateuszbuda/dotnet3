@@ -1,0 +1,56 @@
+﻿@using WMS.ServicesInterface.DTOs
+@model List<WarehouseDetailsDto>
+
+@{
+    ViewBag.Title = "Przesuwanie partii " + ViewBag.GroupInfo.Id;
+}
+
+<h2>Przesuwanie partii @ViewBag.GroupInfo.Id</h2>
+
+<script>
+    function getSectors(Id, internal) {
+        $("#sectorSelect").html("");
+        $.get(
+            "/Sectors/GetOptions/" + Id,
+            function (data) {
+                $("#sectorSelect").html(data);
+            });
+        sectorSelect.disabled = internal ? false : true;
+    }
+
+    function updateForm() {
+        WarehouseId.value = warehouseSelect.options[warehouseSelect.selectedIndex].value;
+        RecipientSectorId.value = sectorSelect.options[sectorSelect.selectedIndex].value;
+    }
+</script>
+
+<select id="warehouseSelect">
+    @foreach (var w in Model)
+    {
+        <option value="@w.Id" onclick="getSectors(@w.Id, @(w.Internal ? 1 : 0))">@w.Name</option>
+    }
+</select>
+
+<select id="sectorSelect">
+</select>
+
+@if (Model.Count != 0)
+{
+    int id = Model[0].Id;
+    int inter = Model[0].Internal ? 1 : 0;
+    <script>
+        getSectors(@id, @inter);
+    </script>
+}
+<br />
+
+@using (Html.BeginForm("Shift", "Groups", new { id = ViewBag.GroupInfo.Id }, FormMethod.Post, new { onsubmit = "updateForm(); return true;" }))
+{
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" id="WarehouseId" name="WarehouseId" />
+    <input type="hidden" id="RecipientSectorId" name="RecipientSectorId" />
+    
+    <input type="submit" value="Zapisz" />
+    <input type="button" value="Anuluj" onclick="location.href='/Groups'" />
+}

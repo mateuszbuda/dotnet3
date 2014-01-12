@@ -1,0 +1,74 @@
+﻿@model List<WMS.ServicesInterface.DTOs.ShiftDto>
+@using WMS.ServicesInterface;
+@using WMS.ServicesInterface.DTOs;
+
+@{
+    ViewBag.Title = "Partie";
+}
+
+@if (TempData["StatusMessage"] != null)
+{
+    <p class="message-success">@TempData["StatusMessage"]</p>
+}
+
+@if (ViewBag.Permissions <= PermissionLevel.User)
+{
+    <a href="@Url.Action("New")" class="button">Dodaj nową</a>
+}
+
+<h2>Partie</h2>
+
+<script>
+    function cInternal() {
+        if (internalCheckBox.checked)
+            $("#groupTable tbody tr.wInternal").show();
+        else
+            $("#groupTable tbody tr.wInternal").hide();
+    }
+
+    function cExternal() {
+        if (externalCheckBox.checked)
+            $("#groupTable tbody tr.wExternal").show();
+        else
+            $("#groupTable tbody tr.wExternal").hide();
+    }
+</script>
+
+<table>
+    <tr>
+        <td style="padding: 0 10px 0 10px;">
+            <input id="internalCheckBox" type="checkbox" checked="checked" onclick="cInternal(); return true;" /></td>
+        <td>@Html.Label("W magazynie", "W magazynie")</td>
+        <td style="width: 100px;" />
+        <td style="padding: 0 10px 0 10px;">
+            <input id="externalCheckBox" type="checkbox" checked="checked" onclick="cExternal(); return true;" /></td>
+        <td>@Html.Label("Wydane", "Wydane")</td>
+
+    </tr>
+</table>
+
+<script>
+    internalCheckBox.checked = true;
+    externalCheckBox.checked = true;
+</script>
+
+<table id="groupTable">
+    <thead class="tabDescription">
+        <tr><th>Id</th><th>Nazwa magazynu</th><th>Przenieś</th></tr>
+    </thead>
+    <tbody>
+        @foreach (ShiftDto group in Model)
+        {
+            <tr class="@(group.Internal ? "wInternal" : "wExternal")">
+                <td class="centered"><a href="@Url.Action("Group", new { id = group.Id })">@group.Id</a></td>
+                <td class="longName"><a href="@Url.Action("Show", "Warehouses", new { id = group.WarehouseId })">@group.WarehouseName</a></td>
+                <td class="centered">
+                    @if (group.Internal)
+                    {
+                        <a href="@Url.Action("Shift", new { id = group.Id })">Przenieś</a> 
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

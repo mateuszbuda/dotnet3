@@ -16,7 +16,7 @@ namespace WMS.ServicesInterface.DTOs
         /// </summary>
         public int Id { get; set; }
         /// <summary>
-        /// Id orzesuwanej partii
+        /// Id przesuwanej partii
         /// </summary>
         public int GroupId { get; set; }
         /// <summary>

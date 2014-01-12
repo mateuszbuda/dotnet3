@@ -1,0 +1,56 @@
+﻿@model WMS.ServicesInterface.DTOs.ProductDto
+
+@{
+    ViewBag.Title = "Edycja produktu";
+}
+
+@if (Model != null)
+{
+    <h2>Edycja produktu '@Model.Name'</h2>
+}
+else
+{
+    <h2>Dodawanie nowego produktu</h2>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    
+    <fieldset>
+        <legend>Formularz edycji produktu</legend>
+
+        @Html.HiddenFor(model => model.Id)
+        <ol>
+            <li>
+                @Html.LabelFor(model => model.Name)
+                @Html.TextBoxFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </li>
+
+            <li>
+                @Html.LabelFor(model => model.ProductionDate)
+                @Html.TextBoxFor(model => model.ProductionDate)
+                @Html.ValidationMessageFor(model => model.ProductionDate)
+            </li>
+
+            <li>
+                @Html.LabelFor(model => model.Price)
+                @Html.TextBoxFor(model => model.Price)
+                @Html.ValidationMessageFor(model => model.Price)
+            </li>
+        </ol>
+        <p>
+            <input type="submit" value="Zapisz" />
+        </p>
+    </fieldset>
+}
+
+<p>
+    <a href="@Url.Action("Index")" class="button">Powrót do listy produktów</a>
+</p>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

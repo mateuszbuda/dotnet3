@@ -45,11 +45,23 @@ namespace WMS.WebClient.Misc
             WarehousesService = warehouseChannelFactory.CreateChannel();
         }
 
-        public ActionResult Execute<T>(Func<T> action, Func<Exception, ErrorMessage> errorMessage = null)
+        public ActionResult Execute<T>(Func<T> action, string viewName = null, 
+            string masterName = null, Func<Exception, ErrorMessage> errorMessage = null)
         {
             try
             {
-                return View(action());
+                if (viewName == null && masterName == null)
+                    return View(action());
+                else if (masterName == null)
+                {
+                    action();
+                    return RedirectToAction(viewName);
+                }
+                else
+                {
+                    action();
+                    return RedirectToAction(viewName, masterName);
+                }
             }
             catch (Exception e)
             {

@@ -5,6 +5,11 @@
     ViewBag.Title = "Magazyny";
 }
 
+@if (TempData["StatusMessage"] != null)
+{
+    <p class="message-success">@TempData["StatusMessage"]</p>
+}
+
 @if (ViewBag.Permissions <= PermissionLevel.Administrator)
 {
     <a href="@Url.Action("New")" class="button">Dodaj nowy</a>
@@ -44,23 +49,23 @@
                         name: "Edytuj",
                         callback: function (key, opt) {
                             window.location.href = "@Url.Action("Edit", "Warehouses")" + opt.$trigger.attr("id").replace("w_", "/");
-                    }
-                },
+                        }
+                    },
                 @if (ViewBag.Permissions <= PermissionLevel.Administrator)
                 {
                     <text>
-                "delete": {
-                    name: "Usuń",
-                    callback: function (key, opt) {
-                        var ans = confirm("Czy na pewno chcesz usunąć magazyn '" + opt.$trigger.attr("title") + "'?");
-                        if (ans)
-                            window.location.href = "@Url.Action("Delete", "Warehouses")" + opt.$trigger.attr("id").replace("w_", "/");
+                    "delete": {
+                        name: "Usuń",
+                        callback: function (key, opt) {
+                            var ans = confirm("Czy na pewno chcesz usunąć magazyn '" + opt.$trigger.attr("title") + "'?");
+                            if (ans)
+                                window.location.href = "@Url.Action("Delete", "Warehouses")" + opt.$trigger.attr("id").replace("w_", "/");
                     }
                 }
-                </text>
+                    </text>
                 }
-            }
+                }
+            });
         });
-    });
     </script>
 }

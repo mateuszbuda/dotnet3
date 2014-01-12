@@ -4,9 +4,16 @@
     ViewBag.Title = "Edycja magazynu";
 }
 
-<h2>Edycja magazynu '@Model.Name'</h2>
+@if (Model != null)
+{
+    <h2>Edycja magazynu '@Model.Name'</h2>
+}
+else
+{
+    <h2>Dodawanie nowego magazynu</h2>
+}
 
-@using(Html.BeginForm())
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)

@@ -241,7 +241,12 @@ namespace WMS.Services
         {
             CheckPermissions(PermissionLevel.Administrator);
             Warehouse w = null;
-            Transaction(tc => w = tc.Entities.Warehouses.Add(warehouseAssembler.ToEntity(warehouse.Content)));
+            Transaction(tc =>
+                {
+                    w = tc.Entities.Warehouses.Add(warehouseAssembler.ToEntity(warehouse.Content));
+                    w.Internal = true;
+                    w.Deleted = false;
+                });
             return new Response<WarehouseInfoDto>(warehouse.Id, warehouseAssembler.ToDto(w));
         }
 
@@ -262,6 +267,8 @@ namespace WMS.Services
                         throw new FaultException<ServiceException>(new ServiceException("Taki magazyn nie istnieje!"));
 
                     warehouseAssembler.ToEntity(warehouse.Content, w);
+                    w.Deleted = false;
+                    w.Internal = true;
                 });
 
             return new Response<WarehouseInfoDto>(warehouse.Id, warehouseAssembler.ToDto(w));

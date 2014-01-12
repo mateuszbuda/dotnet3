@@ -54,9 +54,50 @@ namespace WMS.WebClient.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(WarehouseInfoDto warehouse, int id)
         {
-            // TODO: Zapis i redirect
-            return RedirectToAction("Index", "Home");
-            return View(warehouse);
+            return Execute(() =>
+                {
+                    TempData["StatusMessage"] = "Magazyn '" + warehouse.Name + "' został zapisany pomyślnie.";
+                    return WarehousesService.Edit(new Request<WarehouseInfoDto>(warehouse)).Data;
+                }, "Index");
+        }
+
+        //[Authorize]
+        public ActionResult New()
+        {
+            return View("Edit");
+        }
+
+        //[Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult New(WarehouseInfoDto warehouse)
+        {
+            return Execute(() =>
+                {
+                    TempData["StatusMessage"] = "Magazyn '" + warehouse.Name + "' został dodany pomyślnie.";
+                    return WarehousesService.AddNew(new Request<WarehouseInfoDto>(warehouse));
+                }, "Index");
+        }
+
+        //[Authorize]
+        public ActionResult Delete(int id = -1)
+        {
+            return Execute(() =>
+                {
+                    if (id == -1)
+                        throw new ClientException("Złe id magazynu!");
+
+                    string name = WarehousesService.GetWarehouse(new Request<int>(id)).Data.Name;
+
+                    bool del = WarehousesService.DeleteIfEmpty(new Request<int>(id)).Data;
+
+                    if (!del)
+                        throw new ClientException("Magazyn '" + name + "' nie jest pusty!");
+
+                    TempData["StatusMessage"] = "Pomyślnie usunięto magazyn '" + name + "'.";
+
+                    return true;
+                }, "Index");
         }
     }
 }

@@ -1,10 +1,27 @@
 ﻿@model WMS.WebClient.Models.WarehouseModel
+@using WMS.ServicesInterface;
 
 @{
     ViewBag.Title = "Magazyn '" + Model.Warehouse.Name + "'";
 }
 
+@if (ViewBag.Permissions <= PermissionLevel.Administrator)
+{
+    <a href="@Url.Action("New", "Sectors")" class="button">Dodaj nowy</a>
+}
+@if (ViewBag.Permissions <= PermissionLevel.Administrator)
+{
+    <a onclick="return confirm('Usunąć magazyn \'@Model.Warehouse.Name\'?');" href="@Url.Action("Delete", new { id = Model.Warehouse.Id })" class="button">Usuń</a>
+}
+@if (ViewBag.Permissions <= PermissionLevel.Manager)
+{
+    <a href="@Url.Action("Edit", new { id = Model.Warehouse.Id })" class="button">Edytuj</a>
+}
 <h2>Magazyn '@Model.Warehouse.Name'</h2>
+
+<div>@Model.Warehouse.Street @Model.Warehouse.Num, @Model.Warehouse.Code @Model.Warehouse.City<br />
+    <b>Telefon:</b> @Model.Warehouse.Tel, <b>e-mail:</b> @Model.Warehouse.Mail
+</div>
 
 @if (Model.Sectors.Count == 0)
 {

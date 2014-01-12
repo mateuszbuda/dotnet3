@@ -1,15 +1,14 @@
-# nazwa³em je tak bo ju¿ istniej¹, nie przemyœla³em tego dobrze. mo¿e trzeba bêdzie coœ zmieniæ
-/Account/Login
-/Account/Register - tego mo¿e nie byæ. admin bêdzie tworzy³
-/Account/Manage
-/Account/LogOff
-/Home/Index - menu g³ówne, statystyki
 
-/Warehouses/Index - Magazyny
-/Warehouses/Warehouse/Id - magazyn
-/Warehouses/New
-/Warehouses/Edit/Id
-/Warehouses/Delete/Id
+	/Account/Login
+	/Account/Manage
+	/Account/LogOff
+	/Home/Index - menu g³ówne, statystyki
+
+	/Warehouses/Index - Magazyny
+	/Warehouses/Warehouse/Id - magazyn
+	/Warehouses/New
+	/Warehouses/Edit/Id
+	/Warehouses/Delete/Id
 /Warehouses/Sector/Id - podgl¹d sektora
 
 /Sectors/New

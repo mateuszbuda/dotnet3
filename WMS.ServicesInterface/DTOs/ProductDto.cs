@@ -30,7 +30,7 @@ namespace WMS.ServicesInterface.DTOs
         /// Data produkcji produktu
         /// </summary>
         [Required]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         [Display(Name = "Data produkcji")]
         public DateTime ProductionDate { get; set; }
         /// <summary>

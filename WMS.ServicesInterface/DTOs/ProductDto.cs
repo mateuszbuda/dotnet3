@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WMS.ServicesInterface.Misc;
 
 namespace WMS.ServicesInterface.DTOs
 {
@@ -12,6 +14,7 @@ namespace WMS.ServicesInterface.DTOs
     /// </summary>
     public class ProductDto
     {
+        
         /// <summary>
         /// Id produktu
         /// </summary>
@@ -27,7 +30,7 @@ namespace WMS.ServicesInterface.DTOs
         /// Data produkcji produktu
         /// </summary>
         [Required]
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         [Display(Name = "Data produkcji")]
         public DateTime ProductionDate { get; set; }
         /// <summary>
@@ -35,6 +38,9 @@ namespace WMS.ServicesInterface.DTOs
         /// </summary>
         [Required]
         [DataType(DataType.Currency)]
+        //[RegularExpression("[0-9]+(\\" + separator + "[0-9]*)?", ErrorMessage = "Pole 'Cena jednostkowa' musi mieć format waluty!")]
+        //[Currency(ErrorMessage = "Pole 'Cena jednostkowa' musi mieć format waluty!")]
+        //[DataType(DataType.Custom)]
         [Display(Name = "Cena jednostkowa")]
         public decimal Price { get; set; }
         /// <summary>

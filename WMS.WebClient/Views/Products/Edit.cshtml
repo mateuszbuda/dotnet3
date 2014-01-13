@@ -41,15 +41,12 @@ else
                 @Html.ValidationMessageFor(model => model.Price)
             </li>
         </ol>
+        @Html.HiddenFor(m => m.Version)
         <p>
             <input type="submit" value="Zapisz" />
         </p>
     </fieldset>
 }
-
-<p>
-    <a href="@Url.Action("Index")" class="button">Powrót do listy produktów</a>
-</p>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

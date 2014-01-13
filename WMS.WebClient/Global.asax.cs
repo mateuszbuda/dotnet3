@@ -27,8 +27,8 @@ namespace WMS.WebClient
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
 
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("pl-PL");
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("pl-PL");
+            //Thread.CurrentThread.CurrentUICulture = new CultureInfo("pl-PL");
+            //Thread.CurrentThread.CurrentCulture = new CultureInfo("pl-PL");
             //DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(CurrencyAttribute), typeof(RegularExpressionAttributeAdapter));
         }
 
@@ -36,8 +36,8 @@ namespace WMS.WebClient
         {
             //Thread.CurrentThread.CurrentUICulture = new CultureInfo("pl-PL");
             //Thread.CurrentThread.CurrentCulture = new CultureInfo("pl-PL");
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("pl-PL");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("pl-PL");
+            //Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("pl-PL");
+            //Thread.CurrentThread.CurrentUICulture = new CultureInfo("pl-PL");
             //Thread.CurrentThread.CurrentCulture.DateTimeFormat = new CultureInfo(EnGBCultureKey).DateTimeFormat;
         }
     }

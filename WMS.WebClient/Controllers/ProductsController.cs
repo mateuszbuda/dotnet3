@@ -26,12 +26,9 @@ namespace WMS.WebClient.Controllers
         {
             return Execute(() =>
             {
-                ProductModel p = new ProductModel()
-                {
-                    Product = ProductsService.GetProduct(new Request<int>(id)).Data,
-                };
+                ProductDto p = ProductsService.GetProduct(new Request<int>(id)).Data;
 
-                if (p.Product == null)
+                if (p == null)
                     throw new ClientException("Produkt o takim ID nie istnieje!");
 
                 return p;

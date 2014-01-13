@@ -1,0 +1,32 @@
+﻿@model WMS.ServicesInterface.DTOs.ProductDto
+@using WMS.ServicesInterface;
+
+@{
+    ViewBag.Title = "Produkt " + Model.Name;
+}
+
+@if (ViewBag.Permissions <= PermissionLevel.Manager)
+{
+    <p>
+        <a href="@Url.Action("Edit", new { id = Model.Id })" class="button">Edytuj</a>
+    </p>
+}
+<h2>Produkt '@Model.Name'</h2>
+
+<fieldset>
+    <legend>Informacja o produkcie</legend>
+    <ol>
+        <li>
+            @Html.LabelFor(model => model.Name)
+            @Html.ValueFor(model => model.Name)
+        </li>
+        <li>
+            @Html.LabelFor(model => model.ProductionDate)
+            @Html.ValueFor(model => model.ProductionDate)
+        </li>
+        <li>
+            @Html.LabelFor(model => model.Price)
+            @Html.ValueFor(model => model.Price)
+        </li>
+    </ol>
+</fieldset>

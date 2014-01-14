@@ -679,6 +679,7 @@
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Admin\NewUser.cshtml" />
     <Content Include="Views\Admin\Reset.cshtml" />
+    <Content Include="Views\Products\Product.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

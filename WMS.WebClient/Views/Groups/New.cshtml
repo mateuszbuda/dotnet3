@@ -1,0 +1,103 @@
+﻿@using WMS.ServicesInterface.DTOs
+
+@{
+    ViewBag.Title = "Nowa grupa";
+}
+
+<h2>Dodawanie nowej grupy</h2>
+
+<script>
+    function getSectors() {
+        $("#sectorSelect").html("");
+        $.get(
+            "/Sectors/GetOptions/" + warehouseSelect.options[warehouseSelect.selectedIndex].value,
+            function (data) {
+                $("#sectorSelect").html(data);
+            });
+    }
+
+    function deleteProduct(uid) {
+        $("#div_product_" + uid).remove();
+    }
+
+    var uniqueId = 1;
+
+    function addProduct() {
+        $("#productList").append(
+            '<div id="div_product_' + uniqueId + '" style="clear: both;">' +
+                '<div class="inputDiv">' +
+                    '<label>Produkt</label>' +
+                    '<input type="hidden" name="Products.Index" value="' + uniqueId + '" />' +
+                    '<select name="Products[' + uniqueId + '].Id">' +
+                        @foreach (var p in ViewBag.Products as List<ProductDto>)
+                        {
+                            <text>'<option value="@p.Id">@p.Name</option>' +</text>
+                        }
+                    '</select>' +
+                '</div>' +
+                '<div class="inputDiv">' +
+                    '<label>Ilość</label>' +
+                    '<input style="width: 50px;" type="text" value="1" name="Products[' + uniqueId + '].Count" />' +
+                '</div>' +
+                '<div class="inputDiv">' +
+                    '<label>Usuń</label>' +
+                    '<input type="button" style="width: 50px; height: 30px; padding: 0;" value="X" onclick="deleteProduct(' + uniqueId + ');" />' +
+                '</div>' +
+            '</div>');
+        uniqueId++;
+    }
+</script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        <div class="inputDiv">
+            <label>Magazyn dostawcy</label>
+            <select id="partnerSelect" name="SenderId">
+                @foreach (var p in ViewBag.ExternalWarehouses as IEnumerable<WarehouseDetailsDto>)
+                {
+                    <option value="@p.Id">@p.Name</option>
+                }
+            </select>
+        </div>
+
+        <div class="inputDiv">
+            <label>Magazyn odborcy</label>
+            <select id="warehouseSelect" onchange="getSectors();" name="WarehouseId">
+                @foreach (var w in ViewBag.InternalWarehouses as IEnumerable<WarehouseDetailsDto>)
+                {
+                    <option value="@w.Id">@w.Name</option>
+                }
+            </select>
+        </div>
+
+        <div class="inputDiv">
+            <label>Sektor odbiorcy</label>
+            <select id="sectorSelect" name="SectorId">
+            </select>
+        </div>
+    </div>
+
+    <a class="button" href="#" onclick="addProduct(); return false;">Dodaj produkt</a>
+
+    <div id="productList">
+    </div>
+
+    <div style="clear: both;">
+        <input type="submit" value="Zapisz" />
+        <input type="button" value="Anuluj" onclick="location.href = '/Products'" />
+    </div>
+}
+
+<script>
+    addProduct();
+</script>
+
+@if ((ViewBag.InternalWarehouses as List<WarehouseDetailsDto>).Count != 0)
+{
+    <script>
+        getSectors();
+    </script>
+}

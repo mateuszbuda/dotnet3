@@ -1,8 +1,14 @@
 ﻿@model List<WMS.ServicesInterface.DTOs.ShiftDto>
 @using WMS.ServicesInterface.DTOs
+@using WMS.ServicesInterface
 
 @{
     ViewBag.Title = "Historia partii " + ViewBag.GroupInfo.Id;
+}
+
+@if (ViewBag.Permissions <= PermissionLevel.Manager)
+{
+    <a onclick="return confirm('Czy jesteś pewien, że chcesz wycofać ostatnie przesunięcie dla tej partii?');" href="@Url.Action("Withdraw", new { id = ViewBag.GroupInfo.Id })" class="button">Wycofaj przesunięcie</a>
 }
 
 <h2>Historia partii #@ViewBag.GroupInfo.Id</h2>

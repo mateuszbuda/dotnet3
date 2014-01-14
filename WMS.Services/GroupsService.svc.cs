@@ -21,6 +21,39 @@ namespace WMS.Services
     [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Single, InstanceContextMode = InstanceContextMode.PerSession, IncludeExceptionDetailInFaults = true)]
     public class GroupsService : ServiceBase, IGroupsService
     {
+        public Response<bool> Withdraw(Request<int> groupId)
+        {
+            CheckPermissions(PermissionLevel.Manager);
+
+            Transaction(tc =>
+                {
+                    var shift = tc.Entities.Shifts.Where(x => x.GroupId == groupId.Content && x.Latest == true).
+                        Include(x => x.Sender.Sectors).FirstOrDefault();
+
+                    var prevShift = tc.Entities.Shifts.Where(x => x.GroupId == groupId.Content && x.Latest == false).
+                        OrderByDescending(x => x.Date).FirstOrDefault();
+
+                    var group = tc.Entities.Groups.Where(x => x.Id == groupId.Content).FirstOrDefault();
+
+                    if (prevShift == null)
+                    {
+                        tc.Entities.Shifts.Remove(shift);
+                        tc.Entities.GroupsDetails.RemoveRange(tc.Entities.GroupsDetails.Where(x => x.GroupId == groupId.Content).ToArray());
+                        tc.Entities.Groups.Remove(group);
+                    }
+                    else
+                    {
+                        int sid = shift.Sender.Sectors.FirstOrDefault().Id;
+                        group.SectorId = sid;
+                        //group.Shifts.Remove(shift);
+                        prevShift.Latest = true;
+                        tc.Entities.Shifts.Remove(shift);
+                    }
+                });
+
+            return new Response<bool>(groupId.Id, true);
+        }
+
         /// <summary>
         /// Pobiera partie, znajdujące się aktualnie w zadanym sektorze.
         /// </summary>

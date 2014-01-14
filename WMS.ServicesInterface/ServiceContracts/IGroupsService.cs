@@ -15,6 +15,10 @@ namespace WMS.ServicesInterface.ServiceContracts
     [ServiceContract]
     public interface IGroupsService
     {
+        [OperationContract]
+        [FaultContract(typeof(ServiceException))]
+        Response<bool> Withdraw(Request<int> groupId);
+
         /// <summary>
         /// Pobiera partie, znajdujące się aktualnie w zadanym sektorze.
         /// </summary>

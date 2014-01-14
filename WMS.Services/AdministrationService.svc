@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="WMS.Services.AdmministrationService" CodeBehind="AdministrationService.svc.cs" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="WMS.Services.AdministrationService" CodeBehind="AdministrationService.svc.cs" %>

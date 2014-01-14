@@ -33,11 +33,31 @@ namespace WMS.Services
                 Select(userAssembler.ToDto).FirstOrDefault()));
         }
 
+        public Response<UserDto> ChangePassword(Request<UserDto> user)
+        {
+            UserDto ret = null;
+
+            Transaction(tc =>
+                {
+                    var u = tc.Entities.Users.Where(x => x.Id == user.Content.Id).FirstOrDefault();
+                    u.Password = userAssembler.ToEntity(user.Content).Password;
+                });
+
+            return new Response<UserDto>(user.Id, ret);
+        }
+
         public Response<UserDto> AddNew(Request<UserDto> user)
         {
             CheckPermissions(PermissionLevel.Administrator);
             User u = null;
-            Transaction(tc => u = tc.Entities.Users.Add(userAssembler.ToEntity(user.Content)));
+            Transaction(tc =>
+                {
+                    var us = tc.Entities.Users.Where(x => x.Username == user.Content.Username).FirstOrDefault();
+                    if(us != null)
+                        throw new FaultException<ServiceException>(new ServiceException("Użytkownik o takiej nazwie już istnieje."));
+
+                    u = tc.Entities.Users.Add(userAssembler.ToEntity(user.Content));
+                });
             return new Response<UserDto>(user.Id, userAssembler.ToDto(u));
         }
 

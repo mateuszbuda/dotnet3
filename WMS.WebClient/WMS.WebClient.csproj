@@ -199,6 +199,7 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\ErrorModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\ShiftModel.cs" />
     <Compile Include="Models\WarehouseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -673,6 +674,11 @@
     <Content Include="Views\Sectors\GetOptions.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Groups\New.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Edit.cshtml" />
+    <Content Include="Views\Admin\NewUser.cshtml" />
+    <Content Include="Views\Admin\Reset.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

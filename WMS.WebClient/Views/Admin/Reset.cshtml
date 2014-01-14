@@ -1,0 +1,34 @@
+﻿@model WMS.ServicesInterface.DTOs.UserDto
+
+@{
+    ViewBag.Title = "Reset";
+}
+
+<h2>Resetowanie hasła użytkownika '@Model.Username'</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>reset hasła</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.ConfirmPassword)
+                @Html.PasswordFor(m => m.ConfirmPassword)
+                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+            </li>
+        </ol>
+        <input type="submit" value="Zresetuj" />
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

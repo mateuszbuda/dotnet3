@@ -1,0 +1,26 @@
+﻿@model WMS.ServicesInterface.DTOs.UserDto
+@using WMS.ServicesInterface
+
+@{
+    ViewBag.Title = "Edycja użytkownika";
+}
+
+<h2>Edycja użytkownika '@Model.Username'</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken();
+
+                            string aS = Model.Permissions == PermissionLevel.Administrator ? " selected=\"selected\"" : "";
+                            string aM = Model.Permissions == PermissionLevel.Manager ? " selected=\"selected\"" : "";
+                            string aU = Model.Permissions == PermissionLevel.User ? " selected=\"selected\"" : "";
+    
+    @Html.LabelFor(m => m.Permissions)
+    <select name="permissions">
+        <option value="0"@aS>Administrator</option>
+        <option value="1"@aM>Manager</option>
+        <option value="2"@aU>User</option>
+    </select>
+    
+    <button type="submit" value="Zapisz">Zapisz</button>
+}

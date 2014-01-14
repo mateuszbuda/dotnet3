@@ -36,5 +36,9 @@ namespace WMS.ServicesInterface.ServiceContracts
         [OperationContract]
         [FaultContract(typeof(ServiceException))]
         Response<bool> Delete(Request<int> userId);
+
+        [OperationContract]
+        [FaultContract(typeof(ServiceException))]
+        Response<UserDto> ChangePassword(Request<UserDto> user);
     }
 }

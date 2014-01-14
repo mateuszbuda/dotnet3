@@ -1,4 +1,10 @@
-﻿tr.wInternal td {
+﻿div.inputDiv {
+    display: inline;
+    float: left;
+    padding: 10px;
+}
+
+tr.wInternal td {
     background-color: #DFDEDF;
     border: 1px solid #EFEEEF;
 }

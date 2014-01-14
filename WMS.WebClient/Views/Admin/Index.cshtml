@@ -1,0 +1,38 @@
+﻿@model List<WMS.ServicesInterface.DTOs.UserDto>
+@using WMS.ServicesInterface
+
+@{
+    ViewBag.Title = "Użytkownicy";
+}
+
+<a href="@Url.Action("NewUser")" class="button">Dodaj użytkownika</a>
+
+<h2>Użytkownicy</h2>
+
+<table>
+    <thead class="tabDescription">
+        <tr>
+            <th>Id</th>
+            <th>Użytkownik</th>
+            <th>Typ konta</th>
+            <th>Reset hasła</th>
+            <th>Edytuj</th>
+            <th>Usuń</th>
+        </tr>
+    </thead>
+    @foreach (var user in Model)
+    {
+        string q = "Czy jesteś pewien, że chcesz usunąć użytkownika " + @user.Username + "?";
+        <tr class="tabDescription">
+            <td>@user.Id</td>
+            <td>@user.Username</td>
+            <td>@user.Permissions</td>
+            <td>
+                <input type="button" value="Reset" onclick="location.href='@Url.Action("Reset", new { id = user.Id })';" /></td>
+            <td>
+                <input type="button" value="Edytuj" onclick="location.href='@Url.Action("Edit", new { id = user.Id })';"/></td>
+            <td>
+                <input type="button" value="X" onclick="if(confirm('@q')) { location.href='@Url.Action("Delete", new { id = user.Id })';}" /></td>
+        </tr>
+    }
+</table>

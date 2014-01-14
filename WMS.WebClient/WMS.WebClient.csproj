@@ -680,6 +680,8 @@
     <Content Include="Views\Admin\NewUser.cshtml" />
     <Content Include="Views\Admin\Reset.cshtml" />
     <Content Include="Views\Products\Product.cshtml" />
+    <Content Include="Views\Warehouses\Sector.cshtml" />
+    <Content Include="Views\Sectors\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -70,7 +70,7 @@ namespace WMS.WebClient.Misc
         }
 
         public ActionResult Execute<T>(Func<T> action, string viewName = null,
-            string masterName = null, Func<Exception, ErrorMessage> errorMessage = null)
+            string masterName = null, object options = null,  Func<Exception, ErrorMessage> errorMessage = null)
         {
             try
             {
@@ -81,10 +81,15 @@ namespace WMS.WebClient.Misc
                     action();
                     return RedirectToAction(viewName);
                 }
-                else
+                else if (options == null)
                 {
                     action();
                     return RedirectToAction(viewName, masterName);
+                }
+                else
+                {
+                    action();
+                    return RedirectToAction(viewName, masterName, options);
                 }
             }
             catch (Exception e)

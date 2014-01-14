@@ -122,5 +122,19 @@ namespace WMS.WebClient.Controllers
                     return true;
                 }, "Index");
         }
+
+        //[Authorize]
+        public ActionResult Sector(int id = -1)
+        {
+            return Execute(() =>
+                {
+                    if (id == -1)
+                        throw new ClientException("Taki sektor nie istnieje.");
+
+                    ViewBag.SectorInfo = WarehousesService.GetSector(new Request<int>(id)).Data;
+
+                    return GroupsService.GetSectorGroups(new Request<int>(id)).Data;
+                });
+        }
     }
 }

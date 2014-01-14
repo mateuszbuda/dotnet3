@@ -1,0 +1,42 @@
+﻿@model List<WMS.ServicesInterface.DTOs.ShiftDto>
+@using WMS.ServicesInterface
+
+@{
+    ViewBag.Title = "Sektor " + ViewBag.SectorInfo.Id;
+}
+
+@if (ViewBag.Permissions <= PermissionLevel.Administrator)
+{
+    <a onclick="return confirm('Usunąć sektor \'@ViewBag.SectorInfo.Number\'?');" href="@Url.Action("Delete", "Sectors", new { id = ViewBag.SectorInfo.Id })" class="button">Usuń</a>
+}
+@if (ViewBag.Permissions <= PermissionLevel.Manager)
+{
+    <a href="@Url.Action("Edit", "Sectors", new { id = ViewBag.SectorInfo.Id })" class="button">Edytuj</a>
+}
+
+<h2>Magazyn '@ViewBag.SectorInfo.WarehouseName', Sektor #@ViewBag.SectorInfo.Number</h2>
+
+<table>
+    <thead class="tabDescription">
+        <tr>
+            <th>Id</th>
+            <th>Data</th>
+            <th>Nadawca</th>
+            <th>Wyślij</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var g in Model)
+        {
+            <tr class="tabDescription">
+                <td><a href="@Url.Action("Group", "Groups", new { id = g.Id })">@g.Id</a></td>
+                <td>@g.Date</td>
+                <td><a href="@Url.Action("Show", "Warehouses", new { id = g.SenderId })">@g.SenderName</a></td>
+                <td><a href="@Url.Action("Shift", "Groups", new { id = g.Id })">Wyślij</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<br />
+<a href="@Url.Action("New", "Groups")" class="button">Nowa partia</a>

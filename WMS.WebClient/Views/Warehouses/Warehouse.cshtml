@@ -7,7 +7,7 @@
 
 @if (ViewBag.Permissions <= PermissionLevel.Administrator)
 {
-    <a href="@Url.Action("New", "Sectors")" class="button">Dodaj nowy</a>
+    <a href="@Url.Action("New", "Sectors", new { id = Model.Warehouse.Id })" class="button">Dodaj nowy</a>
 }
 @if (ViewBag.Permissions <= PermissionLevel.Administrator)
 {
@@ -41,3 +41,40 @@
         </li>
     }
 </ul>
+
+@if (ViewBag.Permissions <= PermissionLevel.Manager)
+{
+    @Styles.Render("~/Content/jquery.contextMenu.css")
+    @Scripts.Render("~/Scripts/jquery.ui.position.js")
+    @Scripts.Render("~/Scripts/jquery.contextMenu.js")
+
+
+    <script>
+        $(function () {
+            $.contextMenu({
+                selector: '.warehouse-button',
+                items: {
+                    "edit": {
+                        name: "Edytuj",
+                        callback: function (key, opt) {
+                            window.location.href = "@Url.Action("Edit", "Sectors")" + opt.$trigger.attr("id").replace("s_", "/");
+                        }
+                    },
+                @if (ViewBag.Permissions <= PermissionLevel.Administrator)
+                {
+                    <text>
+                    "delete": {
+                        name: "Usuń",
+                        callback: function (key, opt) {
+                            var ans = confirm("Czy na pewno chcesz usunąć sektor '" + opt.$trigger.attr("title") + "'?");
+                            if (ans)
+                                window.location.href = "@Url.Action("Delete", "Sectors")" + opt.$trigger.attr("id").replace("s_", "/");
+                    }
+                }
+                    </text>
+                }
+                }
+            });
+        });
+    </script>
+}

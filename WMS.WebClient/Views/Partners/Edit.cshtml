@@ -1,0 +1,62 @@
+﻿@model WMS.ServicesInterface.DTOs.PartnerDto
+
+@{
+    ViewBag.Title = "Edycja partnera";
+}
+
+@if (Model != null)
+{
+    <h2>Edycja partnera '@Model.Name'</h2>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Formularz edycji partnera</legend>
+
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.City)
+                @Html.TextBoxFor(m => m.City)
+                @Html.ValidationMessageFor(m => m.City)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Code)
+                @Html.TextBoxFor(m => m.Code)
+                @Html.ValidationMessageFor(m => m.Code)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Street)
+                @Html.TextBoxFor(m => m.Street)
+                @Html.ValidationMessageFor(m => m.Street)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Num)
+                @Html.TextBoxFor(m => m.Num)
+                @Html.ValidationMessageFor(m => m.Num)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Tel)
+                @Html.TextBoxFor(m => m.Tel)
+                @Html.ValidationMessageFor(m => m.Tel)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Mail)
+                @Html.TextBoxFor(m => m.Mail)
+                @Html.ValidationMessageFor(m => m.Mail)
+            </li>
+        </ol>
+
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.Version)
+
+        <input type="submit" value="Zapisz" />
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

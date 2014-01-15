@@ -33,6 +33,10 @@ namespace WMS.ServicesInterface.ServiceContracts
         [FaultContract(typeof(ServiceException))]
         Response<PartnerDto> GetPartner(Request<int> PartnerId);
 
+        [OperationContract]
+        [FaultContract(typeof(ServiceException))]
+        Response<List<PartnerDto>> GetPartnersWithWarehouses(Request request);
+
         /// <summary>
         /// Pobiera listę przesunięć, których nadawcą lub odbiorcą był dany partner
         /// </summary>
@@ -68,5 +72,14 @@ namespace WMS.ServicesInterface.ServiceContracts
         [OperationContract]
         [FaultContract(typeof(ServiceException))]
         Response<PartnerDto> Update(Request<PartnerDto> partner);
+
+        /// <summary>
+        /// Etytuje dane o istniejącym partnerze bez patrzenia na magazyn
+        /// </summary>
+        /// <param name="partner">Zapytanie z wyedytowanym partnerem (magazyn nie jest brany pod uwagę)</param>
+        /// <returns>Odpowiedź z wyedytowanym partnerem</returns>
+        [OperationContract]
+        [FaultContract(typeof(ServiceException))]
+        Response<PartnerDto> UpdateWithoutWarehouse(Request<PartnerDto> partner);
     }
 }

@@ -33,7 +33,7 @@ namespace WMS.ServicesInterface.DTOs
         [Required]
         [StringLength(50)]
         [Display(Name = "Adres e-mail")]
-        [DataType(DataType.EmailAddress)]
+        [DataType(DataType.EmailAddress, ErrorMessage = "To pole musi być poprawnym adresem e-mail")]
         [EmailAddress]
         public string Mail { get; set; }
         /// <summary>

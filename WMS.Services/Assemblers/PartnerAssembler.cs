@@ -60,6 +60,27 @@ namespace WMS.Services.Assemblers
         }
 
         /// <summary>
+        /// Konwersja z bazodanowego partnera na partnera-paczkę do komunikacji z serwerem (pomija magazyn).
+        /// </summary>
+        /// <param name="partner">Konwertowany partner</param>
+        /// <returns>Przekonwertowany partner</returns>
+        public PartnerDto ToDtoWihoutWarehouse(Partner partner)
+        {
+            return new PartnerDto()
+            {
+                City = partner.City,
+                Code = partner.Code,
+                Id = partner.Id,
+                Mail = partner.Mail,
+                Name = partner.Warehouse.Name,
+                Num = partner.Num,
+                Street = partner.Street,
+                Tel = partner.Tel,
+                Version = partner.Version
+            };
+        }
+
+        /// <summary>
         /// Konwersja z partnera-paczki do komunikacji z serwerem na partnera bazodanowe.
         /// </summary>
         /// <param name="partner">Konwertowany partner</param>
@@ -67,7 +88,6 @@ namespace WMS.Services.Assemblers
         /// <returns>Przekonwertowany partner</returns>
         public Partner ToEntity(PartnerDto partner, Partner ent = null)
         {
-            
             if (ent != null && !partner.Version.SequenceEqual(ent.Version))
                 throw new FaultException<ServiceException>(new ServiceException("Ktoś przed chwilą zmodyfikował dane.\nSpróbuj jeszcze raz."));
 
@@ -79,7 +99,31 @@ namespace WMS.Services.Assemblers
             ent.Num = partner.Num;
             ent.Street = partner.Street;
             ent.Tel = partner.Tel;
+
             ent.Warehouse = new WarehouseAssembler().ToEntity(partner.Warehouse, ent.Warehouse);
+
+            return ent;
+        }
+
+        /// <summary>
+        /// Konwersja z partnera-paczki do komunikacji z serwerem na partnera bazodanowe.
+        /// </summary>
+        /// <param name="partner">Konwertowany partner</param>
+        /// <param name="ent">Edytowany bazodanowy partner</param>
+        /// <returns>Przekonwertowany partner</returns>
+        public Partner ToEntityWithoutWarehouse(PartnerDto partner, Partner ent = null)
+        {
+            if (ent != null && !partner.Version.SequenceEqual(ent.Version))
+                throw new FaultException<ServiceException>(new ServiceException("Ktoś przed chwilą zmodyfikował dane.\nSpróbuj jeszcze raz."));
+
+            ent = ent ?? new Partner();
+
+            ent.City = partner.City;
+            ent.Code = partner.Code;
+            ent.Mail = partner.Mail;
+            ent.Num = partner.Num;
+            ent.Street = partner.Street;
+            ent.Tel = partner.Tel;
 
             return ent;
         }

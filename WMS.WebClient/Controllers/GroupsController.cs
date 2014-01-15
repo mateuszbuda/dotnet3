@@ -30,7 +30,7 @@ namespace WMS.WebClient.Controllers
             return Execute(() =>
                 {
                     if (id == -1)
-                        throw new ClientException("Partia o takim id nie istnieje.");
+                        throw new ClientException("Partia o takim warehouseId nie istnieje.");
 
                     ViewBag.GroupInfo = GroupsService.GetGroupInfo(new Request<int>(id)).Data;
 
@@ -86,7 +86,7 @@ namespace WMS.WebClient.Controllers
             return Execute(() =>
                 {
                     if (id == -1)
-                        throw new ClientException("Złe id partii.");
+                        throw new ClientException("Złe warehouseId partii.");
 
                     ViewBag.GroupInfo = GroupsService.GetGroupInfo(new Request<int>(id)).Data;
 
@@ -170,7 +170,7 @@ namespace WMS.WebClient.Controllers
             return Execute(() =>
                 {
                     if (id == -1)
-                        throw new ClientException("Partia o takim id nie istnieje.");
+                        throw new ClientException("Partia o takim warehouseId nie istnieje.");
 
                     GroupsService.Withdraw(new Request<int>(id));
 

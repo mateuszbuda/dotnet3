@@ -124,6 +124,15 @@ namespace WMS.ServicesInterface.ServiceContracts
         Response<WarehouseInfoDto> Edit(Request<WarehouseInfoDto> warehouse);
 
         /// <summary>
+        /// Edycja danych o magazynie partnera
+        /// </summary>
+        /// <param name="warehouse">Zapytanie z wyedytowanym magazynem partnera</param>
+        /// <returns>Odpowiedź z wyedytowanym magazynem partnera</returns>
+        [OperationContract]
+        [FaultContract(typeof(ServiceException))]
+        Response<WarehouseInfoDto> EditParnersWarehouse(Request<WarehouseInfoDto> warehouse);
+
+        /// <summary>
         /// Zwraca numer kolejnego wolnego numeru sektora dla zadanego magazynu
         /// </summary>
         /// <param name="warehouseId">Zapytanie z id magazynu</param>

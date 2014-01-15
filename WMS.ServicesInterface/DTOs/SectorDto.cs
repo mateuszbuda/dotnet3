@@ -7,6 +7,7 @@ using WMS.ServicesInterface;
 using WMS.ServicesInterface.ServiceContracts;
 using WMS.ServicesInterface.DataContracts;
 using WMS.ServicesInterface.DTOs;
+using System.ComponentModel.DataAnnotations;
 
 namespace WMS.ServicesInterface.DTOs
 {
@@ -26,6 +27,9 @@ namespace WMS.ServicesInterface.DTOs
         /// <summary>
         /// Maksymalna liczba partii, które mogą być przechowywane w danym sektorze
         /// </summary>
+        [Required]
+        [Display(Name = "Pojemność")]
+        [Range(1, int.MaxValue)]
         public int Limit { get; set; }
         /// <summary>
         /// Czy sektor został usunięty

@@ -10,11 +10,11 @@
 	/Warehouses/Edit/Id
 	/Warehouses/Delete/Id
 	/Warehouses/Show/Id - przekierowuje w zale¿noœci od id na magazyn lub partnera
-/Warehouses/Sector/Id - podgl¹d sektora
+	/Warehouses/Sector/Id - podgl¹d sektora
 
-/Sectors/New
-/Sectors/Delete/Id
-/Sectors/Edit/Id
+	/Sectors/New/Id - id magazynu
+	/Sectors/Delete/Id
+	/Sectors/Edit/Id
 	/Sectors/GetOptions/Id - pobiera listê sektorów danego magazynu
 
 /Products/Index

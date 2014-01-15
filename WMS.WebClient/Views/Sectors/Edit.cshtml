@@ -1,0 +1,29 @@
+﻿@model WMS.ServicesInterface.DTOs.SectorDto
+
+@{
+    ViewBag.Title = Model != null ? "Edycja sektora" : "Tworzenie nowego sektora";
+}
+
+<h2>@(Model != null ? "Edycja sektora #" + Model.Number + " magazynu '" + Model.WarehouseName + "'" : "Dodawanie sektora")</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken();
+    <fieldset>
+        <legend>Sektor</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.Limit)
+                @Html.TextBoxFor(m => m.Limit)
+                @Html.ValidationMessageFor(m => m.Limit)
+            </li>
+            <li>
+                <button type="submit" value="Zapisz">Zapisz</button>
+            </li>
+        </ol>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

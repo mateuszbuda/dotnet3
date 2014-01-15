@@ -685,6 +685,8 @@
     <Content Include="Views\Partners\Partner.cshtml" />
     <Content Include="Views\Partners\EditWarehouse.cshtml" />
     <Content Include="Views\Partners\Edit.cshtml" />
+    <Content Include="Views\Warehouses\Sector.cshtml" />
+    <Content Include="Views\Sectors\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

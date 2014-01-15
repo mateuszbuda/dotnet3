@@ -337,6 +337,9 @@ namespace WMS.Services
                 if (s == null)
                     throw new FaultException<ServiceException>(new ServiceException("Taki sektor nie istnieje!"));
 
+                if (tc.Entities.Groups.Where(x => x.SectorId == s.Id).Count() > sector.Content.Limit)
+                    throw new FaultException<ServiceException>(new ServiceException("W sektorze znajduje się za dużo partii."));
+
                 sectorAssembler.ToEntity(sector.Content, s);
 
                 if (s.Warehouse == null)

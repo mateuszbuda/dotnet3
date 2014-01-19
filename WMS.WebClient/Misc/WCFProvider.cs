@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Web;
@@ -66,7 +65,7 @@ namespace WMS.WebClient.Misc
                 partnersChannelFactory.Credentials.UserName.Password = password;
                 PartnersService = partnersChannelFactory.CreateChannel();
             }
-            catch (Exception e)
+            catch
             {
                 System.Web.HttpContext.Current.Response.Cookies.Add(new HttpCookie("WMSSession") { Expires = DateTime.Now.AddDays(-1) });
                 System.Web.HttpContext.Current.Response.Cookies.Add(new HttpCookie("WMSPermissions") { Expires = DateTime.Now.AddDays(-1) });
@@ -109,7 +108,7 @@ namespace WMS.WebClient.Misc
 
         protected ErrorMessage GetErrorMessage(Exception e)
         {
-            return new ErrorMessage("Błąd", e.ToString());
+            //return new ErrorMessage("Błąd", e.ToString());
             if (e.GetType() == typeof(FaultException<ServiceException>))
                 return new ErrorMessage("Błąd", (e as FaultException<ServiceException>).Detail.Message);
             else if (e.GetType() == typeof(FaultException))

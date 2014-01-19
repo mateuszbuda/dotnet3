@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.ServiceModel.Web;
-using System.Text;
-using WMS.ServicesInterface;
 using WMS.ServicesInterface.ServiceContracts;
 using WMS.ServicesInterface.DataContracts;
 using WMS.ServicesInterface.DTOs;
-using WMS.Services.Assemblers;
 using WMS.DatabaseAccess.Entities;
 using System.Web.Security;
 using System.ServiceModel.Activation;

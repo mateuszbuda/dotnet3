@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.IdentityModel.Selectors;
-using System.IdentityModel.Tokens;
 using System.ServiceModel;
 using WMS.DatabaseAccess;
 using WMS.DatabaseAccess.Entities;
 using WMS.ServicesInterface.DTOs;
 using WMS.Services.Assemblers;
-using WMS.ServicesInterface.DataContracts;
-using System.Web.Security;
 
 namespace WMS.Services.Authentication
 {
@@ -26,12 +21,12 @@ namespace WMS.Services.Authentication
             using (var ctx = new SystemContext())
             {
                 ctx.TransactionSync(tc =>
-                    {
-                        User usr = tc.Entities.Users.Where(x => x.Username == userName && x.Password == u.Password).FirstOrDefault();
+                {
+                    User usr = tc.Entities.Users.Where(x => x.Username == userName && x.Password == u.Password).FirstOrDefault();
 
-                        if (usr == null)
-                            throw new FaultException("Zły login lub hasło");
-                    });
+                    if (usr == null)
+                        throw new FaultException("Zły login lub hasło");
+                });
             }
         }
     }

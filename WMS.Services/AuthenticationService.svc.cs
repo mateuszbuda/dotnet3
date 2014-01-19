@@ -52,7 +52,7 @@ namespace WMS.Services
             if (ret != null && ret.Password == u.Password)
             {
                 userDto = userAssembler.ToDto(ret);
-                userDto.Token = FormsAuthentication.GetAuthCookie(userDto.Username, user.Content.Remember);
+                //userDto.Token = FormsAuthentication.GetAuthCookie(userDto.Username, user.Content.Remember);
             }
 
             return new Response<UserDto>(user.Id, userDto);

@@ -15,13 +15,13 @@ namespace WMS.WebClient.Controllers
         //
         // GET: /Products/
 
-        //[Authorize]
+        [Authorize]
         public ActionResult Index()
         {
             return Execute(() => ProductsService.GetProducts(new Request()).Data);
         }
 
-        //[Authorize]
+        [Authorize]
         public ActionResult Product(int id = 0)
         {
             return Execute(() =>
@@ -35,7 +35,7 @@ namespace WMS.WebClient.Controllers
             });
         }
 
-        //[Authorize]
+        [Authorize]
         public ActionResult Edit(int id)
         {
             return Execute(() =>
@@ -44,7 +44,7 @@ namespace WMS.WebClient.Controllers
             });
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ProductDto product, int id)
@@ -56,13 +56,13 @@ namespace WMS.WebClient.Controllers
                 }, "Index");
         }
 
-        //[Authorize]
+        [Authorize]
         public ActionResult New()
         {
             return View("Edit");
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult New(ProductDto product)

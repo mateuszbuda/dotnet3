@@ -15,7 +15,7 @@ namespace WMS.WebClient.Controllers
         //
         // GET: /Admin/
 
-        //[Authorize]
+        [Authorize]
         public ActionResult Index()
         {
             return Execute(() =>
@@ -27,7 +27,7 @@ namespace WMS.WebClient.Controllers
                 });
         }
 
-        //[Authorize]
+        [Authorize]
         public ActionResult Edit(int id = -1)
         {
             return Execute(() =>
@@ -42,7 +42,7 @@ namespace WMS.WebClient.Controllers
                 });
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int permissions, int id)
@@ -63,7 +63,7 @@ namespace WMS.WebClient.Controllers
                 }, "Index");
         }
 
-        //[Authorize]
+        [Authorize]
         public ActionResult NewUser()
         {
             return Execute(() =>
@@ -75,7 +75,7 @@ namespace WMS.WebClient.Controllers
                 });
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult NewUser(UserDto user)
@@ -97,7 +97,7 @@ namespace WMS.WebClient.Controllers
             }, "Index");
         }
 
-        //[Authorize]
+        [Authorize]
         public ActionResult Delete(int id = -1)
         {
             return Execute(() =>
@@ -111,7 +111,7 @@ namespace WMS.WebClient.Controllers
                 }, "Index");
         }
 
-        //[Authorize]
+        [Authorize]
         public ActionResult Reset(int id = -1)
         {
             return Execute(() =>
@@ -128,7 +128,7 @@ namespace WMS.WebClient.Controllers
                 });
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Reset(UserDto user, int id = -1)

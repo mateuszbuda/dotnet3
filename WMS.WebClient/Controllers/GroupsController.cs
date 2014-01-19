@@ -15,7 +15,7 @@ namespace WMS.WebClient.Controllers
         //
         // GET: /Groups/
 
-        //[Authorize]
+        [Authorize]
         public ActionResult Index()
         {
             return Execute(() =>
@@ -24,7 +24,7 @@ namespace WMS.WebClient.Controllers
                 });
         }
 
-        //[Authorize]
+        [Authorize]
         public ActionResult Group(int id = -1)
         {
             return Execute(() =>
@@ -38,7 +38,7 @@ namespace WMS.WebClient.Controllers
                 });
         }
 
-        //[Authorize]
+        [Authorize]
         public ActionResult Shift(int id = -1)
         {
             return Execute(() =>
@@ -55,7 +55,7 @@ namespace WMS.WebClient.Controllers
                 });
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Shift(ShiftDto shift, int id)
@@ -80,7 +80,7 @@ namespace WMS.WebClient.Controllers
                 }, "Index", "Groups");
         }
 
-        //[Authorize]
+        [Authorize]
         public ActionResult History(int id = -1)
         {
             return Execute(() =>
@@ -94,7 +94,7 @@ namespace WMS.WebClient.Controllers
                 });
         }
 
-        //[Authorize]
+        [Authorize]
         public ActionResult New(int id = 0)
         {
             return Execute(() =>
@@ -107,7 +107,7 @@ namespace WMS.WebClient.Controllers
                 });
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult New(ShiftModel shift)
@@ -164,7 +164,7 @@ namespace WMS.WebClient.Controllers
                 }, "Index");
         }
 
-        //[Authorize]
+        [Authorize]
         public ActionResult Withdraw(int id = -1)
         {
             return Execute(() =>

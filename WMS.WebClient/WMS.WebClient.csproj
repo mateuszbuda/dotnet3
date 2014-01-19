@@ -680,6 +680,11 @@
     <Content Include="Views\Admin\NewUser.cshtml" />
     <Content Include="Views\Admin\Reset.cshtml" />
     <Content Include="Views\Products\Product.cshtml" />
+    <Content Include="Views\Partners\Index.cshtml" />
+    <Content Include="Views\Partners\Warehouse.cshtml" />
+    <Content Include="Views\Partners\Partner.cshtml" />
+    <Content Include="Views\Partners\EditWarehouse.cshtml" />
+    <Content Include="Views\Partners\Edit.cshtml" />
     <Content Include="Views\Warehouses\Sector.cshtml" />
     <Content Include="Views\Sectors\Edit.cshtml" />
   </ItemGroup>

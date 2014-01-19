@@ -276,6 +276,31 @@ namespace WMS.Services
         }
 
         /// <summary>
+        /// Edycja danych o magazynie partnera
+        /// </summary>
+        /// <param name="warehouse">Zapytanie z wyedytowanym magazynem partnera</param>
+        /// <returns>Odpowiedź z wyedytowanym magazynem partnera</returns>
+        public Response<WarehouseInfoDto> EditParnersWarehouse(Request<WarehouseInfoDto> warehouse)
+        {
+            CheckPermissions(PermissionLevel.Manager);
+            Warehouse w = null;
+
+            Transaction(tc =>
+            {
+                w = tc.Entities.Warehouses.Find(warehouse.Content.Id);
+                //w = tc.Entities.Warehouses.Where(x => w.Id == warehouse.Content.Id).FirstOrDefault();
+                if (w == null)
+                    throw new FaultException<ServiceException>(new ServiceException("Taki magazyn nie istnieje!"));
+
+                warehouseAssembler.ToEntity(warehouse.Content, w);
+                w.Deleted = false;
+                w.Internal = false;
+            });
+
+            return new Response<WarehouseInfoDto>(warehouse.Id, warehouseAssembler.ToDto(w));
+        }
+
+        /// <summary>
         /// Zwraca numer kolejnego wolnego numeru sektora dla zadanego magazynu
         /// </summary>
         /// <param name="warehouseId">Zapytanie z id magazynu</param>

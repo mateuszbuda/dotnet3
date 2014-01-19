@@ -108,7 +108,7 @@ namespace WMS.WebClient.Controllers
             return Execute(() =>
                 {
                     if (id == -1)
-                        throw new ClientException("Złe id magazynu!");
+                        throw new ClientException("Złe warehouseId magazynu!");
 
                     string name = WarehousesService.GetWarehouse(new Request<int>(id)).Data.Name;
 

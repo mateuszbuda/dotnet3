@@ -1,0 +1,63 @@
+﻿@model IEnumerable<WMS.ServicesInterface.DTOs.PartnerDto>
+@using WMS.ServicesInterface;
+
+@{
+    ViewBag.Title = "Partnerzy";
+}
+
+@if (TempData["StatusMessage"] != null)
+{
+    <p class="message-success">@TempData["StatusMessage"]</p>
+}
+
+@if (ViewBag.Permissions <= PermissionLevel.Manager)
+{
+    <a href="@Url.Action("New")" class="button">Dodaj nowego</a>
+}
+<h2>Partnerzy</h2>
+
+@if (Model.Count() == 0)
+{
+    <h6>Brak parnterów w systemie!</h6>   
+}
+
+<table>
+    <thead class="tabDescription">
+        <tr>
+            <th>Id
+            </th>
+            <th>Nazwa
+            </th>
+            <th>Magazyn
+            </th>
+            <th>Miasto
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="tabDescription">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    <a href="@Url.Action("Partner", new { id = item.Id })">@item.Name</a>
+                </td>
+                <td>
+                    <a href="@Url.Action("Warehouse", new { id = item.Warehouse.Id })">@item.Warehouse.Name</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @if (ViewBag.Permissions <= PermissionLevel.Manager)
+                    {
+                        <a href="@Url.Action("Edit", new { id = item.Id })">Edytuj</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

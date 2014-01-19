@@ -33,6 +33,14 @@ namespace WMS.Services
                 Select(partnerAssembler.ToSimpleDto).ToList()));
         }
 
+        public Response<List<PartnerDto>> GetPartnersWithWarehouses(Request request)
+        {
+            CheckPermissions(PermissionLevel.User);
+            return new Response<List<PartnerDto>>(request.Id, Transaction(tc =>
+                tc.Entities.Partners.Include(x => x.Warehouse).Where(p => !p.Warehouse.Deleted).
+                Select(partnerAssembler.ToDto).ToList()));
+        }
+
         /// <summary>
         /// Pobiera dane o partnerze o zadanym id, nawet jeśli został usunięty
         /// </summary>
@@ -89,9 +97,9 @@ namespace WMS.Services
         }
 
         /// <summary>
-        /// Etytuje dane o istniejącym partnerze
+        /// Etytuje dane o istniejącym partnerze wraz z magazynem
         /// </summary>
-        /// <param name="partner">Zapytanie z wyedytowanym partnerem</param>
+        /// <param name="partner">Zapytanie z wyedytowanym partnerem z magazynem</param>
         /// <returns>Odpowiedź z wyedytowanym partnerem</returns>
         public Response<PartnerDto> Update(Request<PartnerDto> partner)
         {
@@ -112,5 +120,28 @@ namespace WMS.Services
             return new Response<PartnerDto>(partner.Id, ret);
         }
 
+        /// <summary>
+        /// Etytuje dane o istniejącym partnerze bez magazynu
+        /// </summary>
+        /// <param name="partner">Zapytanie z wyedytowanym partnerem bez magazynu</param>
+        /// <returns>Odpowiedź z wyedytowanym partnerem</returns>
+        public Response<PartnerDto> UpdateWithoutWarehouse(Request<PartnerDto> partner)
+        {
+            CheckPermissions(PermissionLevel.Manager);
+            PartnerDto ret = null;
+
+            Transaction(tc =>
+            {
+                var p = tc.Entities.Partners.Where(x => x.Id == partner.Content.Id).Include(x => x.Warehouse).FirstOrDefault();
+                if (p == null)
+                    throw new FaultException<ServiceException>(new ServiceException("Ten partner nie istnieje!"));
+
+                partnerAssembler.ToEntityWithoutWarehouse(partner.Content, p);
+                tc.Entities.SaveChanges();
+                ret = partnerAssembler.ToDtoWihoutWarehouse(p);
+            });
+
+            return new Response<PartnerDto>(partner.Id, ret);
+        }
     }
 }

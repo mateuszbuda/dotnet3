@@ -33,6 +33,11 @@ namespace WMS.Services
                 Select(partnerAssembler.ToSimpleDto).ToList()));
         }
 
+        /// <summary>
+        /// Pobiera informacje o wszyskich nieusuniętych partnerach z systemu, wraz z informacjami o magazynie
+        /// </summary>
+        /// <param name="request">Puste zapytanie</param>
+        /// <returns>Odpowiedź z listą partnerów</returns>
         public Response<List<PartnerDto>> GetPartnersWithWarehouses(Request request)
         {
             CheckPermissions(PermissionLevel.User);

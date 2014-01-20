@@ -18,7 +18,7 @@ using System.ServiceModel.Activation;
 namespace WMS.Services
 {
     /// <summary>
-    /// Serwis służącydo uwierzytelniania uzytkowników
+    /// Serwis służący do uwierzytelniania uzytkowników
     /// </summary>
     [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Single, InstanceContextMode = InstanceContextMode.PerSession, IncludeExceptionDetailInFaults = true)]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
@@ -41,6 +41,11 @@ namespace WMS.Services
             return new Response<UserDto>(user.Id, userAssembler.ToDto(ret));
         }
 
+        /// <summary>
+        /// Uwierzytelnia zadanego użytkownika za pomocą cookie lub rzuca wyjątek w razie niepowodzenia
+        /// </summary>
+        /// <param name="user">Zapytanie z uwierzytelnianym użytkownikiem</param>
+        /// <returns>Uwierzytnienionego użytkownika wraz z jego uprawnieniami</returns>
         public Response<UserDto> AuthenticateWithToken(Request<UserDto> user)
         {
             var u = userAssembler.ToEntity(user.Content);
@@ -58,6 +63,11 @@ namespace WMS.Services
             return new Response<UserDto>(user.Id, userDto);
         }
 
+        /// <summary>
+        /// Zmienia hasło podanego użytkownika, służy do zmiany hasła przez użytkownika.
+        /// </summary>
+        /// <param name="user">Zapytanie z kontem użytkownika z ustawionym nowym hasłem</param>
+        /// <returns>Odpowiedź z uzytkownikiem z ustawionym nowym hasłem</returns>
         public Response<UserDto> ChangePassword(Request<UserDto> user)
         {
             var u = userAssembler.ToEntity(user.Content);

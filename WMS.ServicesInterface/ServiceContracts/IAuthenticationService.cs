@@ -26,10 +26,20 @@ namespace WMS.ServicesInterface.ServiceContracts
         [FaultContract(typeof(ServiceException))]
         Response<UserDto> Authenticate(Request<UserDto> user);
 
+        /// <summary>
+        /// Uwierzytelnia zadanego użytkownika za pomocą cookie lub rzuca wyjątek w razie niepowodzenia
+        /// </summary>
+        /// <param name="user">Zapytanie z uwierzytelnianym użytkownikiem</param>
+        /// <returns>Uwierzytnienionego użytkownika wraz z jego uprawnieniami</returns>
         [OperationContract]
         [FaultContract(typeof(ServiceException))]
         Response<UserDto> AuthenticateWithToken(Request<UserDto> user);
 
+        /// <summary>
+        /// Zmienia hasło podanego użytkownika, służy do zmiany hasła przez użytkownika.
+        /// </summary>
+        /// <param name="user">Zapytanie z kontem użytkownika z ustawionym nowym hasłem</param>
+        /// <returns>Odpowiedź z uzytkownikiem z ustawionym nowym hasłem</returns>
         [OperationContract]
         [FaultContract(typeof(ServiceException))]
         Response<UserDto> ChangePassword(Request<UserDto> user);

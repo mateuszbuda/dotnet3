@@ -28,7 +28,9 @@ namespace WMS.ServicesInterface.DTOs
         [DataType(DataType.Password)]
         [Display(Name = "Hasło")]
         public string Password { get; set; }
-
+        /// <summary>
+        /// Hasło do potwierdzenia zgodności przy wprowadzaniu nowego lub edycji
+        /// </summary>
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Potwierdź hasło")]
@@ -41,7 +43,7 @@ namespace WMS.ServicesInterface.DTOs
         /// <summary>
         /// Typ konta (okraśla prawa uzytkownika)
         /// </summary>
-        [Display(Name="Uprawnienia")]
+        [Display(Name = "Uprawnienia")]
         public PermissionLevel Permissions { get; set; }
 
         public int PermissionsVal { get; set; }

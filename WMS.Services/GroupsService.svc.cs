@@ -21,6 +21,11 @@ namespace WMS.Services
     [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Single, InstanceContextMode = InstanceContextMode.PerSession, IncludeExceptionDetailInFaults = true)]
     public class GroupsService : ServiceBase, IGroupsService
     {
+        /// <summary>
+        /// Wycofuje ostatnie przesunięcie i jeśli było to ostatnie przzesunięcie 
+        /// </summary>
+        /// <param name="groupId">Zapytanie z id grupy, której ostatnie przesunięcie ma zostać wycofane</param>
+        /// <returns>Odpowiedź z informacją czy operacja się powiodła</returns>
         public Response<bool> Withdraw(Request<int> groupId)
         {
             CheckPermissions(PermissionLevel.Manager);
@@ -194,7 +199,7 @@ namespace WMS.Services
             Transaction(tc =>
                 {
                     // Pierwsze przesunięcie musi być od magazynu zewnętrznego (partnera)
-                    // i i zarówno magazyn dostawcy jak i odbiorcy muszą być nieusunięte.
+                    // i zarówno magazyn dostawcy jak i odbiorcy muszą być nieusunięte.
                     Warehouse sender = tc.Entities.Warehouses.Where(x => x.Id == shift.SenderId && !x.Deleted).FirstOrDefault();
                     Warehouse recipient = tc.Entities.Warehouses.Where(x => x.Id == shift.WarehouseId && !x.Deleted).FirstOrDefault();
                     if (sender == null || recipient == null)

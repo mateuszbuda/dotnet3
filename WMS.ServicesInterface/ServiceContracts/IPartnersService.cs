@@ -33,6 +33,11 @@ namespace WMS.ServicesInterface.ServiceContracts
         [FaultContract(typeof(ServiceException))]
         Response<PartnerDto> GetPartner(Request<int> PartnerId);
 
+        /// <summary>
+        /// Pobiera informacje o wszyskich nieusuniętych partnerach z systemu, wraz z informacjami o magazynie
+        /// </summary>
+        /// <param name="request">Puste zapytanie</param>
+        /// <returns>Odpowiedź z listą partnerów</returns>
         [OperationContract]
         [FaultContract(typeof(ServiceException))]
         Response<List<PartnerDto>> GetPartnersWithWarehouses(Request request);

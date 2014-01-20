@@ -9,17 +9,17 @@ using WMS.WebClient.Misc;
 
 namespace WMS.WebClient.Controllers
 {
+    /// <summary>
+    /// Dostarcza widoki dla stron podmenu Sektory
+    /// </summary>
     public class SectorsController : WCFProvider
     {
-        //
-        // GET: /Sectors/
-
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
-
-        //[Authoriza]
+        /// <summary>
+        /// Sektory w magazynie
+        /// </summary>
+        /// <param name="id">Id magazynu</param>
+        /// <returns>PartiaView</returns>
+        [Authorize]
         public ActionResult GetOptions(int id)
         {
             List<SectorDto> sectors = null;
@@ -29,7 +29,7 @@ namespace WMS.WebClient.Controllers
                 sectors = WarehousesService.GetSectors(new Request<int>(id)).Data;
                 ViewBag.Internal = WarehousesService.GetWarehouse(new Request<int>(id)).Data.Internal;
             }
-            catch 
+            catch
             {
                 sectors = new List<SectorDto>();
             }
@@ -37,6 +37,10 @@ namespace WMS.WebClient.Controllers
             return PartialView(sectors);
         }
 
+        /// <summary>
+        /// Edycja sektora
+        /// </summary>
+        /// <param name="id">Id sektora</param>
         [Authorize]
         public ActionResult Edit(int id = -1)
         {
@@ -49,6 +53,11 @@ namespace WMS.WebClient.Controllers
                 });
         }
 
+        /// <summary>
+        /// Edycja sektora
+        /// </summary>
+        /// <param name="sector">Wyedytowany sektor</param>
+        /// <param name="id">Id sektora</param>
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -59,7 +68,7 @@ namespace WMS.WebClient.Controllers
             {
                 s = WarehousesService.GetSector(new Request<int>(id)).Data;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return View("DataError", GetErrorMessage(e));
             }
@@ -77,6 +86,10 @@ namespace WMS.WebClient.Controllers
                 }, "Warehouse", "Warehouses", new { id = s.WarehouseId });
         }
 
+        /// <summary>
+        /// Tworzenienowego sektora
+        /// </summary>
+        /// <param name="id">Id sektora (domyślnie 0)</param>
         [Authorize]
         public ActionResult New(int id = -1)
         {
@@ -85,6 +98,12 @@ namespace WMS.WebClient.Controllers
             return View("Edit");
         }
 
+        /// <summary>
+        /// Tworzenie nowego sektora
+        /// </summary>
+        /// <param name="sector">Utworzony sektor</param>
+        /// <param name="id">Id sektora</param>
+        /// <returns></returns>
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -100,6 +119,11 @@ namespace WMS.WebClient.Controllers
                 }, "Warehouse", "Warehouses", new { id = id });
         }
 
+        /// <summary>
+        /// Usuwanie sektora
+        /// </summary>
+        /// <param name="id">Id sektora</param>
+        /// <returns>Informacja czy operacja isę powiodła</returns>
         [Authorize]
         public ActionResult Delete(int id = -1)
         {

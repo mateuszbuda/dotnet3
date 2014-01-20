@@ -10,11 +10,16 @@ using WMS.WebClient.Misc;
 
 namespace WMS.WebClient.Controllers
 {
+    /// <summary>
+    /// Dostarcza widoki dla stron podmenu Panelu Administracyjnego
+    /// </summary>
     public class AdminController : WCFProvider
     {
         //
         // GET: /Admin/
-
+        /// <summary>
+        /// Panel Administratora
+        /// </summary>
         [Authorize]
         public ActionResult Index()
         {
@@ -27,6 +32,10 @@ namespace WMS.WebClient.Controllers
                 });
         }
 
+        /// <summary>
+        /// Edycja konta uzytkownika 
+        /// </summary>
+        /// <param name="id">Id edytowanego użytkownika</param>
         [Authorize]
         public ActionResult Edit(int id = -1)
         {
@@ -42,6 +51,12 @@ namespace WMS.WebClient.Controllers
                 });
         }
 
+        /// <summary>
+        /// Edycja konta uzytkownika
+        /// </summary>
+        /// <param name="permissions">Nadane uprawnienia</param>
+        /// <param name="id">Id wyedytowanego użytkownika</param>
+        /// <returns></returns>
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -63,6 +78,9 @@ namespace WMS.WebClient.Controllers
                 }, "Index");
         }
 
+        /// <summary>
+        /// Tworzenie nowego uzytkownika
+        /// </summary>
         [Authorize]
         public ActionResult NewUser()
         {
@@ -75,6 +93,10 @@ namespace WMS.WebClient.Controllers
                 });
         }
 
+        /// <summary>
+        /// Tworzenie nowego użytkownika
+        /// </summary>
+        /// <param name="user">Nowo utworzony uzytkownik</param>
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -97,6 +119,10 @@ namespace WMS.WebClient.Controllers
             }, "Index");
         }
 
+        /// <summary>
+        /// Usuwanie konta uzytkownika
+        /// </summary>
+        /// <param name="id">Id usuwanego konta</param>
         [Authorize]
         public ActionResult Delete(int id = -1)
         {
@@ -111,6 +137,11 @@ namespace WMS.WebClient.Controllers
                 }, "Index");
         }
 
+        /// <summary>
+        /// Resetowanie hasła uzytkownika
+        /// </summary>
+        /// <param name="id">Id użytkownika</param>
+        /// <returns></returns>
         [Authorize]
         public ActionResult Reset(int id = -1)
         {
@@ -128,6 +159,12 @@ namespace WMS.WebClient.Controllers
                 });
         }
 
+        /// <summary>
+        /// Resetowanie hasła użytkownika
+        /// </summary>
+        /// <param name="user">Użytkownik, któremu zostało zresetowane hasło</param>
+        /// <param name="id">Id użytkownika</param>
+        /// <returns></returns>
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -141,7 +178,7 @@ namespace WMS.WebClient.Controllers
                     if (id == -1)
                         throw new ClientException("Złe ID");
 
-                    if(user.Password != user.ConfirmPassword)
+                    if (user.Password != user.ConfirmPassword)
                         throw new ClientException("Hasła nie są identyczne.");
 
                     user.Id = id;

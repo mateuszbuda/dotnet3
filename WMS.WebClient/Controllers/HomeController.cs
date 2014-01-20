@@ -16,7 +16,6 @@ namespace WMS.WebClient.Controllers
         /// <summary>
         /// Menu główne i statystyki
         /// </summary>
-        /// <returns></returns>
         [Authorize]
         public ActionResult Index()
         {

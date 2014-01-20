@@ -7,18 +7,27 @@ using WMS.WebClient.Misc;
 
 namespace WMS.WebClient.Controllers
 {
+    /// <summary>
+    /// Dostarcza widoki dla stron podmenu Partnerzy
+    /// </summary>
     public class PartnersController : WCFProvider
     {
         //
         // GET: /Partners/
-
-        //[Authorize]
+        /// <summary>
+        /// Podmenu Partnerzy
+        /// </summary>
+        [Authorize]
         public ActionResult Index()
         {
             return Execute(() => PartnersService.GetPartnersWithWarehouses(new Request()).Data);
         }
 
-        //[Authorize]
+        /// <summary>
+        /// Informacje o partnerze
+        /// </summary>
+        /// <param name="id">Id partnera</param>
+        [Authorize]
         public ActionResult Partner(int id = 0)
         {
             return Execute(() =>
@@ -32,7 +41,11 @@ namespace WMS.WebClient.Controllers
             });
         }
 
-        //[Authorize]
+        /// <summary>
+        /// Edycja partnera
+        /// </summary>
+        /// <param name="id">Id partnera</param>
+        [Authorize]
         public ActionResult Edit(int id)
         {
             return Execute(() =>
@@ -41,7 +54,13 @@ namespace WMS.WebClient.Controllers
             });
         }
 
-        //[Authorize]
+        /// <summary>
+        /// Edycja partnera
+        /// </summary>
+        /// <param name="partner">Wyedytowny partner</param>
+        /// <param name="id">Id partnera</param>
+        /// <returns></returns>
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(PartnerDto partner, int id)
@@ -53,13 +72,20 @@ namespace WMS.WebClient.Controllers
             }, "Index");
         }
 
-        //[Authorize]
+        /// <summary>
+        /// Tworzenie nowego partnera
+        /// </summary>
+        [Authorize]
         public ActionResult New()
         {
             return View("Edit");
         }
 
-        //[Authorize]
+        /// <summary>
+        /// Tworzenie nowego partnera
+        /// </summary>
+        /// <param name="partner">Utworzony partner</param>
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult New(PartnerDto partner)
@@ -71,7 +97,11 @@ namespace WMS.WebClient.Controllers
             }, "Index");
         }
 
-        //[Authorize]
+        /// <summary>
+        /// Informacje o magazynie partnera
+        /// </summary>
+        /// <param name="id">Id magazynu</param>
+        [Authorize]
         public ActionResult Warehouse(int id = 0)
         {
             return Execute(() =>
@@ -87,7 +117,11 @@ namespace WMS.WebClient.Controllers
             });
         }
 
-        //[Authorize]
+        /// <summary>
+        /// Edycja magazynu partnera
+        /// </summary>
+        /// <param name="id">Id magazynu</param>
+        [Authorize]
         public ActionResult EditWarehouse(int id)
         {
             return Execute(() =>
@@ -98,7 +132,13 @@ namespace WMS.WebClient.Controllers
             });
         }
 
-        //[Authorize]
+        /// <summary>
+        /// Edycja magazynu partnera
+        /// </summary>
+        /// <param name="warehouse">Wyedytowany magazyn</param>
+        /// <param name="id">Id magazynu</param>
+        /// <returns></returns>
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditWarehouse(WarehouseInfoDto warehouse, int id)

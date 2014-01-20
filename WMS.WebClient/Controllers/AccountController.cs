@@ -10,13 +10,19 @@ using WMS.ServicesInterface.DTOs;
 
 namespace WMS.WebClient.Controllers
 {
+    /// <summary>
+    /// Dostarcza widoki dla stron logowania i zmiany hasła użytkownika
+    /// </summary>
     [Authorize]
     //[InitializeSimpleMembership]
     public class AccountController : WCFProvider
     {
         //
         // GET: /Account/Login
-
+        /// <summary>
+        /// Logowanie
+        /// </summary>
+        /// <param name="returnUrl">Url strony która przekierowała do logowania</param>
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -26,7 +32,11 @@ namespace WMS.WebClient.Controllers
 
         //
         // POST: /Account/Login
-
+        /// <summary>
+        /// Logowanie
+        /// </summary>
+        /// <param name="model">Model z danymi do zalogowania uzytkownika</param>
+        /// <param name="returnUrl">Url strony która przekierowała do logowania</param>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -58,7 +68,9 @@ namespace WMS.WebClient.Controllers
 
         //
         // POST: /Account/LogOff
-
+        /// <summary>
+        /// Wylogowanie
+        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
@@ -75,7 +87,10 @@ namespace WMS.WebClient.Controllers
 
         //
         // GET: /Account/Manage
-
+        /// <summary>
+        /// Edycja danych użytkownika
+        /// </summary>
+        /// <param name="message">Rodzaj wykonanej edycji</param>
         public ActionResult Manage(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -88,7 +103,10 @@ namespace WMS.WebClient.Controllers
 
         //
         // POST: /Account/Manage
-
+        /// <summary>
+        /// Rezultat wykonywanej edycji
+        /// </summary>
+        /// <param name="model">Rodzaj wykonanej edycji</param>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Manage(LocalPasswordModel model)

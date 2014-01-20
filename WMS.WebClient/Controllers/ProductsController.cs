@@ -10,17 +10,26 @@ using WMS.WebClient.Models;
 
 namespace WMS.WebClient.Controllers
 {
+    /// <summary>
+    /// Dostarcza widoki dla stron podmenu Produkty
+    /// </summary>
     public class ProductsController : WCFProvider
     {
         //
         // GET: /Products/
-
+        /// <summary>
+        /// Podmenu Produkty
+        /// </summary>
         [Authorize]
         public ActionResult Index()
         {
             return Execute(() => ProductsService.GetProducts(new Request()).Data);
         }
 
+        /// <summary>
+        /// Informacja o produkcie
+        /// </summary>
+        /// <param name="id">Id produktu</param>
         [Authorize]
         public ActionResult Product(int id = 0)
         {
@@ -35,6 +44,10 @@ namespace WMS.WebClient.Controllers
             });
         }
 
+        /// <summary>
+        /// Edycja produktu
+        /// </summary>
+        /// <param name="id">Id produktu</param>
         [Authorize]
         public ActionResult Edit(int id)
         {
@@ -44,6 +57,12 @@ namespace WMS.WebClient.Controllers
             });
         }
 
+        /// <summary>
+        /// Edycja produktu
+        /// </summary>
+        /// <param name="product">Wyedytowany produkt</param>
+        /// <param name="id">Id produktu</param>
+        /// <returns></returns>
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -56,12 +75,19 @@ namespace WMS.WebClient.Controllers
                 }, "Index");
         }
 
+        /// <summary>
+        /// Tworzenie nowego produktu
+        /// </summary>
         [Authorize]
         public ActionResult New()
         {
             return View("Edit");
         }
 
+        /// <summary>
+        /// Tworzenie nowego produktu
+        /// </summary>
+        /// <param name="product">Utworzony produkt</param>
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]

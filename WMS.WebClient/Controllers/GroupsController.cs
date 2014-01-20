@@ -10,11 +10,17 @@ using WMS.WebClient.Models;
 
 namespace WMS.WebClient.Controllers
 {
+    /// <summary>
+    /// Dostarcza widoki dla stron grup i ich przesunięć
+    /// </summary>
     public class GroupsController : WCFProvider
     {
         //
         // GET: /Groups/
-
+        /// <summary>
+        /// Podmenu grup
+        /// </summary>
+        /// <returns></returns>
         [Authorize]
         public ActionResult Index()
         {
@@ -24,6 +30,10 @@ namespace WMS.WebClient.Controllers
                 });
         }
 
+        /// <summary>
+        /// Szczegóły grupy (produkty i ich ilości)
+        /// </summary>
+        /// <param name="id">Id grupy</param>
         [Authorize]
         public ActionResult Group(int id = -1)
         {
@@ -38,6 +48,10 @@ namespace WMS.WebClient.Controllers
                 });
         }
 
+        /// <summary>
+        /// Przesuwanie grupy
+        /// </summary>
+        /// <param name="id">Id przesuwanej grupy</param>
         [Authorize]
         public ActionResult Shift(int id = -1)
         {
@@ -55,6 +69,12 @@ namespace WMS.WebClient.Controllers
                 });
         }
 
+        /// <summary>
+        /// PRzesuwanie grupy
+        /// </summary>
+        /// <param name="shift">Wykonane przesunięcie</param>
+        /// <param name="id">Id przesuniętej grupy</param>
+        /// <returns></returns>
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -80,6 +100,10 @@ namespace WMS.WebClient.Controllers
                 }, "Index", "Groups");
         }
 
+        /// <summary>
+        /// Historia grupy (przesunięcia)
+        /// </summary>
+        /// <param name="id">Id grupy</param>
         [Authorize]
         public ActionResult History(int id = -1)
         {
@@ -94,6 +118,11 @@ namespace WMS.WebClient.Controllers
                 });
         }
 
+        /// <summary>
+        /// Tworzenie nowej grupy
+        /// </summary>
+        /// <param name="id">Id grupy (domyślnie 0)</param>
+        /// <returns></returns>
         [Authorize]
         public ActionResult New(int id = 0)
         {
@@ -102,11 +131,15 @@ namespace WMS.WebClient.Controllers
                     ViewBag.InternalWarehouses = WarehousesService.GetWarehouses(new Request()).Data;
                     ViewBag.ExternalWarehouses = WarehousesService.GetPartnersWarehouses(new Request()).Data;
                     ViewBag.Products = ProductsService.GetProducts(new Request()).Data;
-                    
+
                     return true;
                 });
         }
 
+        /// <summary>
+        /// Tworzenie nowej grupy
+        /// </summary>
+        /// <param name="shift">Pierwsze przesunięcie nowej grupy</param>
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -124,7 +157,7 @@ namespace WMS.WebClient.Controllers
                     GroupDetailsDto group = new GroupDetailsDto()
                     {
                         Internal = true,
-                        SectorId = shift.SectorId,     
+                        SectorId = shift.SectorId,
                         Products = new List<ProductDetailsDto>()
                     };
 
@@ -164,6 +197,10 @@ namespace WMS.WebClient.Controllers
                 }, "Index");
         }
 
+        /// <summary>
+        /// Wycofywanie ostatniego przesunięcia grupy
+        /// </summary>
+        /// <param name="id">Id grupy</param>
         [Authorize]
         public ActionResult Withdraw(int id = -1)
         {

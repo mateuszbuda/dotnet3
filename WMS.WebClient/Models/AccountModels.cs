@@ -8,6 +8,9 @@ using System.Web.Security;
 
 namespace WMS.WebClient.Models
 {
+    /// <summary>
+    /// Model to widoku zmiany hasła
+    /// </summary>
     public class LocalPasswordModel
     {
         [Required]
@@ -27,6 +30,9 @@ namespace WMS.WebClient.Models
         public string ConfirmPassword { get; set; }
     }
 
+    /// <summary>
+    /// Model do widoku logowania
+    /// </summary>
     public class LoginModel
     {
         [Required]

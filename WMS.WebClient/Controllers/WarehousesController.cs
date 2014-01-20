@@ -10,18 +10,27 @@ using WMS.WebClient.Models;
 
 namespace WMS.WebClient.Controllers
 {
+    /// <summary>
+    /// Dostarcza widoki dla stron podmenu Magazyny
+    /// </summary>
     [RequireHttps]
     public class WarehousesController : WCFProvider
     {
         //
         // GET: /Warehouses/
-
+        /// <summary>
+        /// Podmenu Magazyny
+        /// </summary>
         [Authorize]
         public ActionResult Index()
         {
             return Execute(() => WarehousesService.GetWarehouses(new Request()).Data);
         }
 
+        /// <summary>
+        /// Podgląd magazynu (jego sektorów)
+        /// </summary>
+        /// <param name="id">Id magazynu</param>
         [Authorize]
         public ActionResult Warehouse(int id = 0)
         {
@@ -40,6 +49,10 @@ namespace WMS.WebClient.Controllers
                 });
         }
 
+        /// <summary>
+        /// Ifnormacja o magazynie (dane kontaktowe)
+        /// </summary>
+        /// <param name="id">Id magazynu</param>
         [Authorize]
         public ActionResult Show(int id)
         {
@@ -63,6 +76,10 @@ namespace WMS.WebClient.Controllers
             }
         }
 
+        /// <summary>
+        /// Edycja informacji o magazynie
+        /// </summary>
+        /// <param name="id">Id magazynu</param>
         [Authorize]
         public ActionResult Edit(int id)
         {
@@ -72,6 +89,11 @@ namespace WMS.WebClient.Controllers
                 });
         }
 
+        /// <summary>
+        /// Edycja informacji o magazynie
+        /// </summary>
+        /// <param name="warehouse">Wyedytowany magazyn</param>
+        /// <param name="id">Id magazynu</param>
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -84,12 +106,19 @@ namespace WMS.WebClient.Controllers
                 }, "Index");
         }
 
+        /// <summary>
+        /// Tworzenie nowego magazynu
+        /// </summary>
         [Authorize]
         public ActionResult New()
         {
             return View("Edit");
         }
 
+        /// <summary>
+        /// Tworzenie nowego magazynu
+        /// </summary>
+        /// <param name="warehouse">Utworzony magazyn</param>
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -102,6 +131,11 @@ namespace WMS.WebClient.Controllers
                 }, "Index");
         }
 
+        /// <summary>
+        /// Usuwanie magazynu
+        /// </summary>
+        /// <param name="id">Id magazynu</param>
+        /// <returns>Informacja czy operacja siępowiodła</returns>
         [Authorize]
         public ActionResult Delete(int id = -1)
         {
@@ -123,6 +157,10 @@ namespace WMS.WebClient.Controllers
                 }, "Index");
         }
 
+        /// <summary>
+        /// Podgląd sektora (grup, które w nim się znajdują)
+        /// </summary>
+        /// <param name="id">Id sektora</param>
         [Authorize]
         public ActionResult Sector(int id = -1)
         {

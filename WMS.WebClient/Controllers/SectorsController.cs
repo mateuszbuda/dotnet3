@@ -37,7 +37,7 @@ namespace WMS.WebClient.Controllers
             return PartialView(sectors);
         }
 
-        //[Authorize]
+        [Authorize]
         public ActionResult Edit(int id = -1)
         {
             return Execute(() =>
@@ -49,7 +49,7 @@ namespace WMS.WebClient.Controllers
                 });
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(SectorDto sector, int id = -1)
@@ -77,7 +77,7 @@ namespace WMS.WebClient.Controllers
                 }, "Warehouse", "Warehouses", new { id = s.WarehouseId });
         }
 
-        //[Authorize]
+        [Authorize]
         public ActionResult New(int id = -1)
         {
             ViewBag.WarehouseId = id;
@@ -85,7 +85,7 @@ namespace WMS.WebClient.Controllers
             return View("Edit");
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult New(SectorDto sector, int id = -1)
@@ -100,7 +100,7 @@ namespace WMS.WebClient.Controllers
                 }, "Warehouse", "Warehouses", new { id = id });
         }
 
-        //[Authorize]
+        [Authorize]
         public ActionResult Delete(int id = -1)
         {
             SectorDto s;

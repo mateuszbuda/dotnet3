@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using DotNetOpenAuth.AspNet;
-using Microsoft.Web.WebPages.OAuth;
-using WebMatrix.WebData;
 using WMS.WebClient.Models;
 using WMS.WebClient.Misc;
 using WMS.ServicesInterface.DataContracts;
@@ -45,11 +40,13 @@ namespace WMS.WebClient.Controllers
 
                 if (x.Data != null)
                 {
-                    Response.Cookies.Add(x.Data.Token);
+                    //Response.Cookies.Add(x.Data.Token);
                     HttpCookie permCookie = new HttpCookie("WMSPermissions", x.Data.Permissions.ToString());
-                    permCookie.Expires = x.Data.Token.Expires;
-                    permCookie.HttpOnly = x.Data.Token.HttpOnly;
+                    permCookie.Expires = DateTime.Now.AddYears(1);
+                    //permCookie.HttpOnly =;
                     Response.Cookies.Add(permCookie);
+                    Session["WMSData"] = model.Password;
+                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
 
                     return RedirectToLocal(returnUrl);
                 }
@@ -70,6 +67,7 @@ namespace WMS.WebClient.Controllers
             {
                 Response.Cookies.Add(new HttpCookie("WMSSession") { Expires = DateTime.Now.AddDays(-1) });
                 Response.Cookies.Add(new HttpCookie("WMSPermissions") { Expires = DateTime.Now.AddDays(-1) });
+                Session["WMSData"] = null;
             }
 
             return RedirectToAction("Index", "Home");
@@ -115,11 +113,12 @@ namespace WMS.WebClient.Controllers
                     if (u != null)
                     {
                         changePasswordSucceeded = true;
-                        Response.Cookies.Add(u.Token);
+                        //Response.Cookies.Add(u.Token);
                         HttpCookie permCookie = new HttpCookie("WMSPermissions", u.Permissions.ToString());
-                        permCookie.Expires = u.Token.Expires;
-                        permCookie.HttpOnly = u.Token.HttpOnly;
+                        permCookie.Expires = DateTime.Now.AddYears(1);
+                        //permCookie.HttpOnly = u.Token.HttpOnly;
                         Response.Cookies.Add(permCookie);
+                        Session["WMSData"] = model.NewPassword;
                     }
                 }
                 catch (Exception)

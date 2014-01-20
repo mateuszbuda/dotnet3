@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.IdentityModel.Selectors;
-using System.IdentityModel.Tokens;
 using System.ServiceModel;
 using WMS.DatabaseAccess;
 using WMS.DatabaseAccess.Entities;
 using WMS.ServicesInterface.DTOs;
 using WMS.Services.Assemblers;
-using WMS.ServicesInterface.DataContracts;
-using System.Web.Security;
 
 namespace WMS.Services.Authentication
 {
@@ -21,23 +16,18 @@ namespace WMS.Services.Authentication
     {
         public override void Validate(string userName, string password)
         {
-            // Wyłączona walidacja!!!
+            User u = new UserAssembler().ToEntity(new UserDto() { Username = userName, Password = password });
 
-            //FormsAuthenticationTicket ticket;
-            //try
-            //{
-            //    ticket = FormsAuthentication.Decrypt(password);
-            //}
-            //catch
-            //{
-            //    throw new FaultException("Zły login lub hasło!");
-            //}
+            using (var ctx = new SystemContext())
+            {
+                ctx.TransactionSync(tc =>
+                {
+                    User usr = tc.Entities.Users.Where(x => x.Username == userName && x.Password == u.Password).FirstOrDefault();
 
-            //if (ticket.Expired)
-            //    throw new FaultException("Sesja wygasła!");
-
-            //if (ticket.Name != userName)
-            //    throw new FaultException("Zły login lub hasło");
+                    if (usr == null)
+                        throw new FaultException("Zły login lub hasło");
+                });
+            }
         }
     }
 }

@@ -139,8 +139,11 @@ namespace WMS.Services
                         if (w.Internal == true && w.Deleted == false)
                             foreach (DatabaseAccess.Entities.Sector s in w.Sectors)
                             {
-                                all += s.Limit;
-                                full += s.Groups.Count;
+                                if (s.Deleted == false)
+                                {
+                                    all += s.Limit;
+                                    full += s.Groups.Count;
+                                }
                             }
                 });
 

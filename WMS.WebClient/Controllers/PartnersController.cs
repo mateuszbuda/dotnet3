@@ -78,7 +78,7 @@ namespace WMS.WebClient.Controllers
         [Authorize]
         public ActionResult New()
         {
-            return View("Edit");
+            return View("EditWarehouse");
         }
 
         /// <summary>

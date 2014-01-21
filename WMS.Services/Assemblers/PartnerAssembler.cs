@@ -100,6 +100,21 @@ namespace WMS.Services.Assemblers
             ent.Street = partner.Street;
             ent.Tel = partner.Tel;
 
+            // ZMIANA!
+            if (partner.Warehouse == null)
+                partner.Warehouse = new WarehouseInfoDto()
+                {
+                    City = partner.City,
+                    Code = partner.Code,
+                    Deleted = false,
+                    Internal = false,
+                    Mail = partner.Mail,
+                    Name = partner.Name,
+                    Num = partner.Num,
+                    Street = partner.Street,
+                    Tel = partner.Tel,
+                };
+            // KONIEC ZMIANY!
             ent.Warehouse = new WarehouseAssembler().ToEntity(partner.Warehouse, ent.Warehouse);
 
             return ent;
